@@ -478,6 +478,7 @@ def set_path(pre):
 
     if int(tempo[9:11]) > 12:
         path = path + name_observatory + "_" + data + "/"
+
     else:
         tempo = datetime.utcnow().strftime('%Y%m%d_%H%M%S')
         ano = tempo[0:4]
@@ -485,10 +486,11 @@ def set_path(pre):
         dia = tempo[6:8]
         abs_julian_day = jd_to_date(date_to_jd(ano, mes, int(dia)) - 1)
 
-        if 0 < abs_julian_day[2] < 10:
-            path = path + name_observatory + "_" + str(abs_julian_day[0]) + "_" + mes + "0" + str(abs_julian_day[2]) + "/"
-        else:
-            path = path + name_observatory + "_" + str(abs_julian_day[0]) + "_" + mes + str(abs_julian_day[2]) + "/"
+        aux_month = "%.2d" % abs_julian_day[1]
+
+        aux_day = "%.2d" % abs_julian_day[2]
+
+        path = path + name_observatory + "_" + str(abs_julian_day[0]) + "_" + aux_month + aux_day + "/"
 
     return path, tempo
 
