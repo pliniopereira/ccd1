@@ -1,0 +1,39 @@
+# Windows image file caches
+# Folder config file
+# Recycle Bin used on file shares
+# Windows Installer files
+# Windows shortcuts
+# =========================
+# Operating System Files
+# =========================
+
+# OSX
+# =========================
+
+# Thumbnails
+# Files that might appear in the root of a volume
+# Directories potentially created on remote AFP share
+# Byte-compiled / optimized / DLL files
+# C extensions
+# Distribution / packaging
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+# Installer logs
+# Unit test / coverage reports
+# Translations
+# Django stuff:
+# Flask stuff:
+# Scrapy stuff:
+# PyBuilder
+# IPython Notebook
+# pyenv
+# celery beat schedule file
+# dotenv
+# virtualenv
+# Spyder project settings
+# Rope project settings
+.idea/
+/src/camera
+/src/config
+/src/system
