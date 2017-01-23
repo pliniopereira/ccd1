@@ -23,6 +23,7 @@ Manual para uso do Manager CCD10.
 
 ![Conectar](https://raw.githubusercontent.com/pliniopereira/ccd10/master/doc/img/Menu_010.png)
 
+>Conecta/desconecta o manager à câmera
 
 ---
 
@@ -58,7 +59,7 @@ Automático:
 
 ## Project Settings
 ![Project Settings](https://raw.githubusercontent.com/pliniopereira/ccd10/master/doc/img/Project%20Settings_020.png)
->Project Name:
+>Project Name: Define o nome do projeto.
 
 >Site ID:
 
@@ -123,5 +124,5 @@ Configurações da camera.
 > Botão: Cancel: Fecha a janela sem salvar.
 
 
-
-
+#References
+###
