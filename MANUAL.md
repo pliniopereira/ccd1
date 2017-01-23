@@ -58,6 +58,35 @@ Automático:
 
 ## Project Settings
 ![Project Settings](https://raw.githubusercontent.com/pliniopereira/ccd10/master/doc/img/Project%20Settings_020.png)
+>Project Name:
+
+>Site ID:
+
+>Imager ID:
+
+>Latitude(°):
+
+>Longitude(°):
+
+>Elevation(m):
+
+>Pressure(mb):
+
+>Temperature(°):
+
+>Max Solar Elevation(°):
+
+>Ignore Lunar Position:
+
+>Max Lunar Elevation(°):
+
+>Max Lunar Phase(%):
+
+> Botão: Save: Salva com os dados nos campos.
+
+> Botão: Clear: Limpa os campos.
+
+> Botão: Cancel: Fecha a janela sem salvar.
 
 ## Camara Settings
 ![Project Settings](https://raw.githubusercontent.com/pliniopereira/ccd10/master/doc/img/Camera%20Settings_018.png)
