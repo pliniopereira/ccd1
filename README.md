@@ -12,6 +12,7 @@ Creating an application to manage a CCD SBIG Camera.
 <br>
 
 -----
+This project is maintained by [Plínio Pereira](https://github.com/pliniopereira) and [Hideki Inoue](https://github.com/hiyoku)
 
 ## License
 
