@@ -19,17 +19,17 @@ Manual para uso do Manager CCD10.
 # Manager CCD10
 ![Manager CCD10](https://github.com/pliniopereira/ccd10/blob/master/doc/img/CCD_Controller_1.0.0.png)
 
-1. Dá acesso ao File, Connection, Operation Mode e Options.
+1. Toolbar para acesso ao File, Connection, Operation Mode e Options.
 
 2. Mostra o horário em Universal Time Coordinated(UTC).
 
 3. Mostra os dados do observatório.
 
-4. Mostra as posições do Sol e da Lua e a fase da Lua.
+4. Mostra as posições do Sol, Lua e a fase da Lua.
 
-5. Mostra se a ventoinha da câmera está ligada e sua temperatura.
+5. Mostra os dados câmera, bem como se a ventoinha da está ligada e sua temperatura.
 
-6. Mostra o status da operação, em verde que está rodando, vermelho está parado e amarelo em standby.
+6. Mostra o status da operação, em verde que está em observação, vermelho tem algum erro e amarelo em standby.
 
 7. Mostra a última imagem tirada.
 
