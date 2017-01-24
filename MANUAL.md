@@ -3,15 +3,16 @@ Manual para uso do Manager CCD10.
 ---
 
 <!-- toc -->
-  * [Manager CCD10](Manager CCD10)
+
+  * [Manager CCD10](#Manager CCD10)
   * [Conectar](#conectar)
-  * [Modos de operação](#modos)
+  * [Modos de operação](#modosdeoperação)
     * [Manual](#manual)
     * [Automático](#automatico)
   * [Settings](#settings)
-    * [System Settings](#system)
-    * [Project Settings](#project)
-    * [Camera Settings](#camera)
+    * [System Settings](#systemsettings)
+    * [Project Settings](#projectsettings)
+    * [Camera Settings](#camerasettings)
 
 <!-- toc stop -->
 
