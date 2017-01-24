@@ -486,9 +486,9 @@ def set_path(pre):
         abs_julian_day = jd_to_date(date_to_jd(ano, mes, int(dia)) - 1)
 
         if 0 < abs_julian_day[2] < 10:
-            path = path + name_observatory + "_" + str(abs_julian_day[0]) + "_" + str(abs_julian_day[1]) + "0" + str(abs_julian_day[2]) + "/"
+            path = path + name_observatory + "_" + str(abs_julian_day[0]) + "_" + mes + "0" + str(abs_julian_day[2]) + "/"
         else:
-            path = path + name_observatory + "_" + str(abs_julian_day[0]) + "_" + str(abs_julian_day[1]) + str(abs_julian_day[2]) + "/"
+            path = path + name_observatory + "_" + str(abs_julian_day[0]) + "_" + mes + str(abs_julian_day[2]) + "/"
 
     return path, tempo
 

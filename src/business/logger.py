@@ -51,13 +51,13 @@ class Logger(QtCore.QThread):
                 abs_julian_day = SbigDriver.jd_to_date(SbigDriver.date_to_jd(ano, mes, int(dia)) - 1)
 
                 if 0 < abs_julian_day[2] < 10:
-                    name_log = name_log_folder + "/LOG_" + name_observatory + "_" + str(abs_julian_day[0]) + "_" + str(
-                        abs_julian_day[1]) + "0" + str(abs_julian_day[2]) + '.txt'
+                    name_log = name_log_folder + "/LOG_" + name_observatory + "_" + str(abs_julian_day[0]) + "_" + mes\
+                               + "0" + str(abs_julian_day[2]) + '.txt'
                     log = open(str(name_log), 'a')
                     log.write(str(data_log) + " - " + str(self.text) + "\n")
                     log.close()
                 else:
-                    name_log = name_log_folder + "/LOG_" + name_observatory + "_" + str(abs_julian_day[0]) + "_" + str(abs_julian_day[1]) + str(
+                    name_log = name_log_folder + "/LOG_" + name_observatory + "_" + mes + "_" + str(abs_julian_day[1]) + str(
                         abs_julian_day[2]) + '.txt'
                     log = open(str(name_log), 'a')
                     log.write(str(data_log) + " - " + str(self.text) + "\n")
