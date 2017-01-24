@@ -25,7 +25,7 @@ Manual para uso do Manager CCD10.
 
 3. Mostra os dados do observatório.
 
-4. Mostra as posições do Sol e da Lua e fase da Lua.
+4. Mostra as posições do Sol e da Lua e a fase da Lua.
 
 5. Mostra se a ventoinha da câmera está ligada e sua temperatura.
 
