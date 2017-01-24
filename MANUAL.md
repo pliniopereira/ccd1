@@ -117,7 +117,7 @@ Configurações da camera.
 
 > Expusure time: Tempo de exposição.
 
-> Binning: 
+> Binning: Agrupamento de 2x2 por nxn pixels.
 
 > Time between photo(s): Tempo definirá o intervalo entre fotos.
 
