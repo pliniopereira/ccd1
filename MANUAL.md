@@ -113,7 +113,7 @@ Automático:
 
 > Botão: Cancel: Fecha a janela sem salvar.
 
-<h2 id="camarasettings">Project Settings</h2>
+<h2 id="camarasettings">Camera Settings</h2>
 
 ![Project Settings](https://raw.githubusercontent.com/pliniopereira/ccd10/master/doc/img/Camera%20Settings_018.png)
 
