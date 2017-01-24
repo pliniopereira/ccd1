@@ -25,7 +25,8 @@ sudo apt-get install python3
 
 sudo apt-get install python3-pyqt5 python3-numpy python3-pyfits python3-scipy python3-ephem libusb-1.0-0-dev libusb-dev fxload msttcorefonts
 ``` 
-# Python 3.5
+<h1 id="python3.5">Python 3.5</h1>
+
 Instalação no terminal:
 ``` 
 sudo apt-get install python3
@@ -110,7 +111,9 @@ Instalação no terminal:
 sudo apt-get install python3-ephem
 ``` 
 --------------------------------------------------------------------------------------------------------------
-# libusb-1.0-0-dev
+
+<h1 id="libusb-1.0-0-dev">libusb-1.0-0-dev</h1>
+
 Descrição: ​ libusb​ is a C library that provides generic access to USB devices. It is intended to be used by developers to facilitate the production of applications that communicate with USB hardware.
 It is ​ portable​ : Using a single cross-platform API, it provides access to USB devices on Linux, OS X, Windows, Android, OpenBSD, etc.
 It is ​ user-mode​ : No special privilege or elevation is required for the application to communicate with a device.
