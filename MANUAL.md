@@ -139,7 +139,3 @@ Configurações da camera.
 > Botão: Clear: Limpa os campos.
 
 > Botão: Cancel: Fecha a janela sem salvar.
-
-
-#References
-###
