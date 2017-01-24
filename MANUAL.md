@@ -2,9 +2,8 @@ Manual para uso do Manager CCD10.
 
 ---
 
-![Manager CC10](https://raw.githubusercontent.com/pliniopereira/ccd10/master/doc/img/Sele%C3%A7%C3%A3o_009.png)
-
 <!-- toc -->
+  * [Manager CCD10](managerccd10)
   * [Conectar](#conectar)
   * [Modos de operação](#modosdeoperacao)
     * [Manual](#manual)
@@ -17,6 +16,8 @@ Manual para uso do Manager CCD10.
 <!-- toc stop -->
 
 ---
+# Manager CCD10
+![Manager CCD10](https://raw.githubusercontent.com/pliniopereira/ccd10/master/doc/img/menu_conectar.png)
 
 # Conectar
 ![Conectar](https://raw.githubusercontent.com/pliniopereira/ccd10/master/doc/img/menu_conectar.png)
@@ -37,7 +38,7 @@ Manual para uso do Manager CCD10.
 
 ## Automático
 Automático:
-> Fica em standby até que a posição da lua e do sol atingirem um posicionamento ideial, espera temperatura definida ou apos 10 minutos.
+> Fica em standby até que a posição da lua e do sol atingirem um posicionamento ideal, espera temperatura definida ou apos 10 minutos.
 
 
 ---
