@@ -3,7 +3,7 @@ Manual para uso do Manager CCD10.
 ---
 
 <!-- toc -->
-  * [Manager CCD10](managerCCD10)
+  * [Manager CCD10](Manager CCD10)
   * [Conectar](#conectar)
   * [Modos de operação](#modos)
     * [Manual](#manual)
