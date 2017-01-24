@@ -23,15 +23,15 @@ Manual para uso do Manager CCD10.
 
 1. Toolbar para acesso ao File, Connection, Operation Mode e Options.
 
-2. Mostra o horário em Universal Time Coordinated(UTC).
+2. Mostra o horário em Universal Time Coordinated (UTC).
 
 3. Mostra os dados do observatório.
 
 4. Mostra as posições do Sol, Lua e a fase da Lua.
 
-5. Mostra os dados câmera, bem como se o sistema de refrigeração está ligado e sua temperatura.
+5. Mostra os dados da câmera, bem como o status do sistema de refrigeração e temperatura da CCD.
 
-6. Mostra o status da operação, em verde que está em observação, vermelho tem algum erro e amarelo em standby.
+6. Mostra o status da operação, em verde se estiver em observação, amarelo se estiver em standby e vermelho se apresentar algum erro.
 
 7. Mostra a última imagem tirada.
 
@@ -53,12 +53,10 @@ Manual para uso do Manager CCD10.
 ![Modos de operação](https://raw.githubusercontent.com/pliniopereira/ccd10/master/doc/img/Menu_011.png)
 
 ## Manual
-> Começa tirar fotos assim que a temperatura definida ou apos 10 minutos.
+> Inicia as observações assim que a CCD atingir a temperatura definida ou que o tempo estabelecido no "CCD Cooling Time" seja satisfeita.
 
 ## Automático
-Automático:
-> Fica em standby até que a posição da Lua e do Sol atingirem um posicionamento ideal, espera temperatura definida ou apos 10 minutos.
-
+> Inicia as observações baseadas nas condições iniciais do Sol e da Lua. Caso as condições sejam satisfeiras as observações iniciarção, caso contrário o sistema fica em standby até que as posições do Sol e da Lua atinjam as condições definidas para iniciar as observações.
 
 ---
 
@@ -71,13 +69,11 @@ Automático:
 
 ![System Settings](https://raw.githubusercontent.com/pliniopereira/ccd10/master/doc/img/System%20Settings_019.png)
 
+> Checkbox que define se ao iniciar o Sistema Operacional o Manager inicia automaticamente.
 
-> Checkbox que define se ao iniciar o Manager conecta automaticamente ao inicia.
+> Definição do local onde serão salvos os logs do Manager.
 
-> Marca onde os logs serão salvos.
-
-> Marca onde as imagens serão salvos.
-
+> Definição do local onde as imagens serão salvas.
 
 <h2 id="projectsettings">Project Settings</h2>
 
@@ -85,9 +81,9 @@ Automático:
 
 > Project Name: Define o nome do projeto.
 
-> Site ID: Local do observatório, defini o nome do diretório e da imagem.
+> Site ID: Iniciais do local do observatório, defini o prefixo nome do diretório e do nome da imagem.
 
-> Imager ID: 
+> Imager ID: Identificador do Equipamento
 
 > Latitude(°): Define a latitude do observatório.
 
@@ -99,51 +95,51 @@ Automático:
 
 > Temperature(°): Define a temperatura do local do observatório.
 
-> Max Solar Elevation(°):
+> Max Solar Elevation(°): Define a elevação máxima para iniciar as observações
 
 > Ignore Lunar Position: Ignora a posição da Lua no modo automático.
 
-> Max Lunar Elevation(°):
+> Max Lunar Elevation(°):Define a elevação máxima para iniciar as observações.
 
-> Max Lunar Phase(%):
+> Max Lunar Phase(%): Define a % da fase da Lua máxima a para iniciar as observações.
 
-> Botão: Save: Salva com os dados nos campos.
+> Botão: Save: Salva com os dados dos campos do formulário em arquivo.
 
-> Botão: Clear: Limpa os campos.
+> Botão: Clear: Limpa os campos do formulário.
 
-> Botão: Cancel: Fecha a janela sem salvar.
+> Botão: Cancel: Fecha a janela sem salvar os dados dos campos do formulário.
 
 <h2 id="camerasettings">Camera Settings</h2>
 
 ![Camera Settings](https://raw.githubusercontent.com/pliniopereira/ccd10/master/doc/img/Camera%20Settings_018.png)
 
 ###Configurações da camera:
-> Temperatura(°C): Define a temperatura que a camera deve atingir para começar a tirar fotos.
+> Temperature(°C): Define a temperatura que a camera deve atingir antes de inicar as observações.
 
-> Filter name: Define o filtro que estará sendo utilizada.
+> Filter name: Define o nome do filtro que será utilizado.
 
 > Expusure time: Tempo de exposição.
 
-> Binning: Agrupamento de 2x2 por nXn pixels.
+> Binning: Agrupamento de nxn pixeis para 1x1 pixel.
 
-> Time between photo(s): Tempo definirá o intervalo entre fotos.
+> Time between photo(s): Intervalo de tempo entre as fotos.
 
-> CCD Cooling Time: Define tempo que a camera tenta antigir a temperatura.
+> CCD Cooling Time: Define o tempo mínimo para a camera antigir a temperatura especificada.
 
-> Shooter: Define se o shooter ficar aberto ou fechado.
+> Shooter: Define a condição do obturador: aberto ou fechado.
 
-> Image contrast: bottom level:
+> Image contrast: bottom level: nível inferior normalizado para ajuste de contraste
 
-> Image contrast: top level:
+> Image contrast: top level: nível superior normalizado para ajuste de contraste
 
 > Botão: Take Photo: Tira uma foto.
 
-> Botão: Set Temp: Estabelece a temperatura desejada.
+> Botão: Set Temp: Envia o comando de temperatura de refrigeração para a CCD.
 
-> Botão: Fan (On/Off): Liga e desliga ventoinha.
+> Botão: Fan (On/Off): Liga e desliga o sistema de refrigeração.
 
-> Botão: Save: Salva com os dados nos campos.
+> Botão: Save: Salva com os dados dos campos em arquivo.
 
-> Botão: Clear: Limpa os campos.
+> Botão: Clear: Limpa os campos do formulário.
 
-> Botão: Cancel: Fecha a janela sem salvar.
+> Botão: Cancel: Fecha a janela sem salvar os campos modificados.
