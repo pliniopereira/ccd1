@@ -27,7 +27,7 @@ Manual para uso do Manager CCD10.
 
 4. Mostra as posições do Sol, Lua e a fase da Lua.
 
-5. Mostra os dados câmera, bem como se a ventoinha da está ligada e sua temperatura.
+5. Mostra os dados câmera, bem como se o sistema de refrigeração está ligado e sua temperatura.
 
 6. Mostra o status da operação, em verde que está em observação, vermelho tem algum erro e amarelo em standby.
 
