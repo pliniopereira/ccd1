@@ -54,7 +54,7 @@ Manual para uso do Manager CCD10.
 
 ## Automático
 Automático:
-> Fica em standby até que a posição da lua e do sol atingirem um posicionamento ideal, espera temperatura definida ou apos 10 minutos.
+> Fica em standby até que a posição da Lua e do Sol atingirem um posicionamento ideal, espera temperatura definida ou apos 10 minutos.
 
 
 ---
@@ -76,29 +76,30 @@ Automático:
 
 ## Project Settings
 ![Project Settings](https://raw.githubusercontent.com/pliniopereira/ccd10/master/doc/img/Project%20Settings_020.png)
->Project Name: Define o nome do projeto.
 
->Site ID:
+> Project Name: Define o nome do projeto.
 
->Imager ID:
+> Site ID: Local do observatório, defini o nome do diretório e da imagem.
 
->Latitude(°):
+> Imager ID: 
 
->Longitude(°):
+> Latitude(°): Define a latitude do observatório.
 
->Elevation(m):
+> Longitude(°): Define a longitude do observatório.
 
->Pressure(mb):
+> Elevation(m): Define a altitude em metros do local do observatório.
 
->Temperature(°):
+> Pressure(mb): Define a pressão atmosférica em milibares do local do observatório.
 
->Max Solar Elevation(°):
+> Temperature(°): Define a temperatura do local do observatório.
 
->Ignore Lunar Position:
+> Max Solar Elevation(°):
 
->Max Lunar Elevation(°):
+> Ignore Lunar Position: Ignora a posição da Lua no modo automático.
 
->Max Lunar Phase(%):
+> Max Lunar Elevation(°):
+
+> Max Lunar Phase(%):
 
 > Botão: Save: Salva com os dados nos campos.
 
