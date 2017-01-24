@@ -4,7 +4,7 @@ Manual para uso do Manager CCD10.
 
 <!-- toc -->
 
-  * [Manager CCD10](#Manager CCD10)
+  * [Manager CCD10](#managerccd10)
   * [Conectar](#conectar)
   * [Modos de operação](#modosdeoperação)
     * [Manual](#manual)
@@ -17,7 +17,8 @@ Manual para uso do Manager CCD10.
 <!-- toc stop -->
 
 ---
-# Manager CCD10
+<h1 id="managerccd10">Manager CCD10</h1>
+
 ![Manager CCD10](https://github.com/pliniopereira/ccd10/blob/master/doc/img/CCD_Controller_1.0.0.png)
 
 1. Toolbar para acesso ao File, Connection, Operation Mode e Options.
@@ -66,7 +67,8 @@ Automático:
 
 ![System Settings](https://raw.githubusercontent.com/pliniopereira/ccd10/master/doc/img/win_settings.png)
 
-## System Settings
+<h2 id="systemsettings">System Settings</h2>
+
 ![System Settings](https://raw.githubusercontent.com/pliniopereira/ccd10/master/doc/img/System%20Settings_019.png)
 
 
@@ -76,7 +78,9 @@ Automático:
 
 > Marca onde as imagens serão salvos.
 
-## Project Settings
+
+<h2 id="projectsettings">Project Settings</h2>
+
 ![Project Settings](https://raw.githubusercontent.com/pliniopereira/ccd10/master/doc/img/Project%20Settings_020.png)
 
 > Project Name: Define o nome do projeto.
@@ -109,7 +113,8 @@ Automático:
 
 > Botão: Cancel: Fecha a janela sem salvar.
 
-## Camara Settings
+<h2 id="camarasettings">Project Settings</h2>
+
 ![Project Settings](https://raw.githubusercontent.com/pliniopereira/ccd10/master/doc/img/Camera%20Settings_018.png)
 
 Configurações da camera.
