@@ -17,8 +17,15 @@ Manual para uso do Manager CCD10.
 
 ---
 # Manager CCD10
-![Manager CCD10](https://raw.githubusercontent.com/pliniopereira/ccd10/master/doc/img/menu_conectar.png)
+![Manager CCD10](https://github.com/pliniopereira/ccd10/blob/master/doc/img/CCD%20Controller%201.0.0.png)
 
+###1
+###2
+###3
+###4
+###5
+###6
+###7
 # Conectar
 ![Conectar](https://raw.githubusercontent.com/pliniopereira/ccd10/master/doc/img/menu_conectar.png)
 
