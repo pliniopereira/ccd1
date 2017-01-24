@@ -8,7 +8,7 @@ Manual para uso do Manager CCD10.
   * [Conectar](#conectar)
   * [Modos de operação](#modosdeoperação)
     * [Manual](#manual)
-    * [Automático](#automatico)
+    * [Automático](#automático)
   * [Settings](#settings)
     * [System Settings](#systemsettings)
     * [Project Settings](#projectsettings)
@@ -55,7 +55,7 @@ Manual para uso do Manager CCD10.
 ## Manual
 > Inicia as observações assim que a CCD atingir a temperatura definida ou que o tempo estabelecido no "CCD Cooling Time" seja satisfeita.
 
-<h2 id="automatico">Automático</h2>
+<h2 id="automático">Automático</h2>
 > Inicia as observações baseadas nas condições iniciais do Sol e da Lua. Caso as condições sejam satisfeiras as observações iniciarção, caso contrário o sistema fica em standby até que as posições do Sol e da Lua atinjam as condições definidas para iniciar as observações.
 
 ---
