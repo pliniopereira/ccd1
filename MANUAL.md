@@ -21,13 +21,13 @@ Manual para uso do Manager CCD10.
 
 1. Dá acesso ao File, Connection, Operation Mode e Options.
 
-2. Mostra o horario em Universal Time Coordinated.
+2. Mostra o horário em Universal Time Coordinated(UTC).
 
-3. 
+3. Mostra os dados do observatório.
 
-4.
+4. Mostra as posições do Sol e da Lua e fase da Lua.
 
-5. Monstra se a ventoinha da câmera está ligada e sua temperatura.
+5. Mostra se a ventoinha da câmera está ligada e sua temperatura.
 
 6. Mostra o status da operação, em verde que está rodando, vermelho está parado e amarelo em standby.
 
