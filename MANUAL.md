@@ -19,19 +19,19 @@ Manual para uso do Manager CCD10.
 # Manager CCD10
 ![Manager CCD10](https://github.com/pliniopereira/ccd10/blob/master/doc/img/CCD_Controller_1.0.0.png)
 
-###1
+1. Dá acesso ao File, Connection, Operation Mode e Options.
 
-###2
+2. Mostra o horario em Universal Time Coordinated.
 
-###3
+3. 
 
-###4
+4.
 
-###5
+5. Monstra se a ventoinha da câmera está ligada e sua temperatura.
 
-###6
+6. Mostra o status da operação, em verde que está rodando, vermelho está parado e amarelo em standby.
 
-###7
+7. Mostra a última imagem tirada.
 
 ---
 
