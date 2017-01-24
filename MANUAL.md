@@ -113,11 +113,11 @@ Automático:
 
 > Botão: Cancel: Fecha a janela sem salvar.
 
-<h2 id="camarasettings">Camera Settings</h2>
+<h2 id="camerasettings">Camera Settings</h2>
 
-![Project Settings](https://raw.githubusercontent.com/pliniopereira/ccd10/master/doc/img/Camera%20Settings_018.png)
+![Camera Settings](https://raw.githubusercontent.com/pliniopereira/ccd10/master/doc/img/Camera%20Settings_018.png)
 
-Configurações da camera.
+###Configurações da camera:
 > Temperatura(°C): Define a temperatura que a camera deve atingir para começar a tirar fotos.
 
 > Filter name: Define o filtro que estará sendo utilizada.
