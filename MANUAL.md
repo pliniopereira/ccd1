@@ -45,7 +45,8 @@ Manual para uso do Manager CCD10.
 
 ---
 
-# Modos de operação
+<h1 id="modosdeoperação">Modos de operação</h1>
+
 ![Modos de operação](https://raw.githubusercontent.com/pliniopereira/ccd10/master/doc/img/menu_man_aut.png)
 
 ![Modos de operação](https://raw.githubusercontent.com/pliniopereira/ccd10/master/doc/img/Menu_011.png)
