@@ -4,7 +4,7 @@ Manual para uso do Manager CCD10.
 
 <!-- toc -->
 
-  * [Manager CCD10](#managerccd10)
+  * [Main Window: Overview](#mainwindowoverview)
   * [Conectar](#conectar)
   * [Modos de operação](#modosdeoperação)
     * [Manual](#manual)
@@ -17,7 +17,7 @@ Manual para uso do Manager CCD10.
 <!-- toc stop -->
 
 ---
-<h1 id="managerccd10">Manager CCD10</h1>
+<h1 id="mainwindowoverview">Main Window: Overview</h1>
 
 ![Manager CCD10](https://github.com/pliniopereira/ccd10/blob/master/doc/img/CCD_Controller_1.0.0.png)
 
