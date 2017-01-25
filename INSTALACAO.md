@@ -2,6 +2,7 @@ Instalação testada no Linux Mint 18.1.
 
 <!-- toc -->
 ##Used:
+  * [python-sbigudrv 0.5](#python-sbigudrv0.5)
   * [Python 3.5](#python3.5)
   * [PyQt5](#pyqt5)
   * [Numpy](#numpy)
@@ -16,8 +17,17 @@ Instalação testada no Linux Mint 18.1.
 <!-- toc stop -->
 
 Instalação dos drivers da câmera:
-Descrição: Drivers encontrados no site da empresa.
-Contatos da empresa: Web: ​ www.sbig.com​ E-mail: sbig@sbig.com
+<h1 id="python-sbigudrv0.5">python-sbigudrv 0.5</h1>
+Descrição: Python wrappers for SBIG (tm) Universal Driver.
+
+Author: [Paulo Henrique Silva](mailto:ph.silva@gmail.com), [Astrophysics Group](http://www.astro.ufsc.br/), 
+[Universidade Federal de Santa Catarina](http://ufsc.br/).
+
+Fonte: <https://pypi.python.org/pypi/python-sbigudrv/0.5>
+
+Obs: Contatos da empresa fornecedora da Sbig: 
+
+Web: ​ www.sbig.com​ E-mail: sbig@sbig.com
 
 Resumo:
 ``` 
