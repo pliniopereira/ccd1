@@ -56,7 +56,7 @@ Manual para uso do Manager CCD10.
 > Inicia as observações assim que a CCD atingir a temperatura definida ou que o tempo estabelecido no "CCD Cooling Time" seja satisfeita.
 
 <h2 id="automático">Automático</h2>
-> Inicia as observações baseadas nas condições iniciais do Sol e da Lua. Caso as condições sejam satisfeiras as observações iniciarção, caso contrário o sistema fica em standby até que as posições do Sol e da Lua atinjam as condições definidas para iniciar as observações.
+> Inicia as observações baseadas nas condições iniciais do Sol e da Lua. Caso as condições sejam satisfeiras as observações iniciação, caso contrário o sistema fica em standby até que as posições do Sol e da Lua atinjam as condições definidas para iniciar as observações.
 
 ---
 
