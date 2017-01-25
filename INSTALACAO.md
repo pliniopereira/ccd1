@@ -157,7 +157,7 @@ Instalação no terminal:
 sudo apt-get install fxload
 ``` 
 # msttcorefonts
-Descrição: The TrueType core fonts for the web that were once available from http://www.microsoft.com typography/fontpack/. The port is constructedso that theactual fonts are downloaded from Sourceforge's site atbuild time so this port does not 'redistribute' the fonts, it justmakes it easy to install them on an OpenBSD system.
+Descrição: The TrueType core fonts for the web that were once available from <http://www.microsoft.com> typography/fontpack/. The port is constructedso that theactual fonts are downloaded from Sourceforge's site atbuild time so this port does not 'redistribute' the fonts, it justmakes it easy to install them on an OpenBSD system.
 Source: ​ http://ports.su/fonts/msttcorefonts
 
 Usado na classe: [utils/camera/SbigDriver.py](https://github.com/pliniopereira/ccd10/blob/master/src/utils/camera/SbigDriver.py) para desenhar na imagem os dados.
