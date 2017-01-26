@@ -7,7 +7,9 @@ from src.business.shooters.SThread import SThread
 
 
 class ContinuousShooterThread(QtCore.QThread):
-    """classe para modo manual"""
+    '''
+        classe para modo manual
+    '''
 
     signalAfterShooting = QtCore.pyqtSignal(name="signalAfterShooting")
     signal_temp = QtCore.pyqtSignal(name="signalTemp")

@@ -273,7 +273,7 @@ class Camera(metaclass=Singleton):
 
     def check_temp(self):
         '''
-            funcao que espera temperatura setada ou tempo pre-determinada
+            funcao que espera temperatura setada ou tempo pre-determinado
         '''
         try:
             now = datetime.now()
