@@ -9,6 +9,9 @@ from src.utils.camera import SbigDriver
 
 
 class SThread(QtCore.QThread):
+    '''
+    Roda em paralelo, fica tirando fotos.
+    '''
 
     def __init__(self):
         super(SThread, self).__init__()
