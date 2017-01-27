@@ -35,7 +35,8 @@ class SThread(QtCore.QThread):
 
     def take_dark(self):
         '''
-        manda instrução para o SbigDriver para tirar uma foto dark
+        Manda instrução para o SbigDriver para tirar uma foto dark\
+        com os valores na info[]
         '''
         try:
             self.set_etime_pre_binning()
@@ -52,7 +53,6 @@ class SThread(QtCore.QThread):
         '''
         seta os valores para o tempo de exposição = etime, prefixo, binning, se a foto é dark ou não,\
         e valores Image contrast: bottom e top level
-        :return:
         '''
 
         try:

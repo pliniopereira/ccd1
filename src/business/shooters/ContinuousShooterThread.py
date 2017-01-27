@@ -19,6 +19,10 @@ class ContinuousShooterThread(QtCore.QThread):
         self.continuous = True
         self.s = timeSleep
 
+        '''
+        SThread manda para o Sbigdriver as informações para se tirar a foto em si.
+        '''
+
         self.ss = SThread()
         self.ss.started.connect(self.thread_iniciada)
         self.console = ConsoleThreadOutput()
