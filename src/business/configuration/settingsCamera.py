@@ -17,6 +17,21 @@ class SettingsCamera:
 
     def set_camera_settings(self, temperature_camera, pre, exp, bin, time, time_cooling, get_level1,\
                             get_level2, dark_photo):
+        """
+        :param temperature_camera: seta o valor que a camera deve atingir para começo das observacoes
+        :param pre: prefixo, dá nome ao path que vai ser criado no comeco das observacoes\
+        e onde as imagens ficaram salvas
+        :param exp: Tempo de exposição.
+        :param bin: valor agrupamento de nxn pixeis para 1x1 pixel.
+        :param time: Intervalo de tempo entre as fotos.
+        :param time_cooling: tempo que a camera espera atingir a temperatura seta no campo \
+        temperature_camera, caso nao seja atingida a observacao se inicia indepedente da \
+        temperatura alcancada ou nao
+        :param get_level1:  nível inferior normalizado para ajuste de contraste
+        :param get_level2: nível superior normalizado para ajuste de contraste
+        :param dark_photo: valor guardado que defini se a foto tirada terá o shooter fechada \
+        ou aberta
+        """
         self._settings.setValue(c.TEMPERATURE, temperature_camera)
         self._settings.setValue(c.PREFIXO, pre)
         self._settings.setValue(c.EXPOSICAO, exp)
@@ -26,7 +41,6 @@ class SettingsCamera:
         self._settings.setValue(c.GET_LEVEL1, get_level1)
         self._settings.setValue(c.GET_LEVEL2, get_level2)
         self._settings.setValue(c.DARK_PHOTO, dark_photo)
-
 
     def get_camera_settings(self):
         return self._settings.value(c.TEMPERATURE), self._settings.value(c.PREFIXO), self._settings.value(c.EXPOSICAO),\
