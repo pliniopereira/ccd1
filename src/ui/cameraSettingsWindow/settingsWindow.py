@@ -10,6 +10,9 @@ from src.utils.camera.SbigDriver import (getlinkstatus)
 
 
 class SettingsWindow(QtWidgets.QWidget):
+    '''
+    cria os campos e espaços no menu settings window
+    '''
     def __init__(self, parent=None):
         super(SettingsWindow, self).__init__(parent)
         self.cam = SettingsCamera()

@@ -7,6 +7,9 @@ from src.utils.camera import SbigDriver
 
 
 class Logger(QtCore.QThread):
+    '''
+    cria o log
+    '''
     def __init__(self):
         super(Logger, self).__init__()
         self.text = None

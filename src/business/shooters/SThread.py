@@ -38,7 +38,7 @@ class SThread(QtCore.QThread):
 
     def take_dark(self):
         '''
-        Manda instrução para o SbigDriver para tirar uma foto dark\
+        Manda instrução para o SbigDriver para tirar uma foto dark(shooter fechado)\
         com os valores na info[]
         '''
         try:

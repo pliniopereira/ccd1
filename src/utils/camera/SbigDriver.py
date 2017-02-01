@@ -39,6 +39,12 @@ except Exception as e:
 
 
 def cmd(ccc, cin, cout):
+    '''
+    :param ccc:
+    :param cin:
+    :param cout:
+    :return:
+    '''
     udrv.SBIGUnivDrvCommand.argtypes = [c_ushort, POINTER(cin), POINTER(cout)]
 
     if cin is not None:
@@ -75,12 +81,18 @@ def cmd(ccc, cin, cout):
 # Beginning Functions
 # Open Driver
 def open_driver():
+    '''
+    :return: usa o valor do drive instalado
+    '''
     a = cmd(SbigLib.PAR_COMMAND.CC_OPEN_DRIVER.value, None, None)
     return a
 
 
 # Open Device USB
 def open_deviceusb():
+    '''
+    :return: conecta o manager com a camera via usb
+    '''
     cin = SbigStructures.OpenDeviceParams
     cout = None
     try:
@@ -141,6 +153,9 @@ def openDevice(ip):
 
 # Establishing Link
 def establishinglink():
+    '''
+    :return: estabelece conexao do manager com a camera
+    '''
     try:
         cin = SbigStructures.EstablishLinkParams
         cout = SbigStructures.EstablishLinkResults
@@ -165,6 +180,9 @@ def getlinkstatus():
 
 
 def set_temperature(regulation, setpoint, autofreeze=True):
+    '''
+    pega os valores setados na classe Camera e manda para camera
+    '''
     if regulation is True:
         temp_regulation = SbigLib.TEMPERATURE_REGULATION.REGULATION_ON
     else:
@@ -200,6 +218,9 @@ def set_temperature(regulation, setpoint, autofreeze=True):
 
 # Getting Temperature
 def get_temperature():
+    '''
+    :return: temperatura da camera
+    '''
     qsp = SbigStructures.QueryTemperatureStatusParams
     qtsr = SbigStructures.QueryTemperatureStatusResults2
 
@@ -431,6 +452,10 @@ def retorna_imagem(name_png):
 
 
 def resize_image_512x512(name_png):
+    '''
+    :param name_png: recebe imagem png
+    :return: modifica tamanho para 512x512
+    '''
     img = Image.open(name_png)
     resized_img = img.resize((int(512), int(512)))
     #resized_img = ImageOps.autocontrast(resized_img, 2)
@@ -438,6 +463,10 @@ def resize_image_512x512(name_png):
 
 
 def draw_image(name_png):
+    '''
+    :param name_png: recebe imagem png
+    :return: escreve valores na imagem e salva
+    '''
     hora_img, data_img = get_date_hour_image(name_png)
     filter_img, observatory_img = get_filter_observatory(name_png)
 

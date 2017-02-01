@@ -9,7 +9,7 @@ import ephem
 from src.business.configuration.configProject import ConfigProject
 
 
-class Ephemeris():
+class Ephemeris:
     def __init__(self):
         self.config = ConfigProject()
         info = self.config.get_geographic_settings()
@@ -26,7 +26,6 @@ class Ephemeris():
         self.latitude = info[0]  # '-45.51'
         self.longitude = info[1]  # '-23.12'
         self.elev = info[2]  # 350
-
 
     def print_time_elapsed(self):
         init_time = datetime.datetime.utcnow()
