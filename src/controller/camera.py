@@ -17,7 +17,7 @@ from src.utils.singleton import Singleton
 
 class Camera(metaclass=Singleton):
     '''
-        classe de controle da camera
+        classe de controle que faz comunicao com a camera fisica.
     '''
 
     def __init__(self):
@@ -34,7 +34,13 @@ class Camera(metaclass=Singleton):
         self.main = Status()
         self.now_plus_10 = datetime.now()
         self.settedhour = datetime.now()
+        """
+        executa o modo manual continuousShooterThread
+        """
         self.continuousShooterThread = ContinuousShooterThread(int(self.settings.get_camera_settings()[4]))
+        """
+        executa o modo automatico ephemerisShooterThread
+        """
         self.ephemerisShooterThread = EphemerisShooter()
 
         self.sthread = SThread()
@@ -54,7 +60,9 @@ class Camera(metaclass=Singleton):
         self.temp_contador_manual = 0
 
     def init_slots(self):
-        # Ephemeris Shooter Slots
+        """
+        Ephemeris Shooter Slots
+        """
         self.ephemerisShooterThread.started.connect(self.eshooter_started)
         self.ephemerisShooterThread.finished.connect(self.eshooter_finished)
         self.ephemerisShooterThread.signal_started_shooting.connect(self.shooter_mode)
@@ -63,8 +71,9 @@ class Camera(metaclass=Singleton):
 
         self.ephemerisShooterThread.continuousShooterThread.started.connect(self.eshooter_observation_started)
         self.ephemerisShooterThread.continuousShooterThread.finished.connect(self.eshooter_observation_finished)
-
-        # Criando connect da temperatura
+        """
+        Criando connect da temperatura
+        """
         # self.ephemerisShooterThread.continuousShooterThread.signalAfterShooting.connect()
         self.continuousShooterThread.signal_temp.connect(self.check_temp_manual)
         self.continuousShooterThread.finished.connect(self.standby_mode)

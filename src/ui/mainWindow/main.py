@@ -13,6 +13,9 @@ from src.ui.testWindow.MainWindow2 import MainWindow2 as conts
 
 
 class Main(QtWidgets.QMainWindow):
+    """
+    classe de criacao da interface
+    """
     def __init__(self):
         super(Main, self).__init__()
         Status(self)
@@ -51,7 +54,9 @@ class Main(QtWidgets.QMainWindow):
     # Creating menubar
 
     def init_menu(self):
-        # Creating the Menu Bar
+        """
+        Creating the Menu Bar
+        """
         menubar = self.menuBar()
 
         a1 = self.action_close()
@@ -70,7 +75,9 @@ class Main(QtWidgets.QMainWindow):
 
     # All actions needs return a QAction and a menuType, line '&File'
     def action_close(self):
-        # Creating the button to close the application
+        """
+        Creating the button to close the application
+        """
         aexit = QtWidgets.QAction(QIcon('\icons\exit.png'), "&Exit", self)
         aexit.setShortcut("Ctrl+Q")
         aexit.setStatusTip("Exit Application")
@@ -81,6 +88,9 @@ class Main(QtWidgets.QMainWindow):
         return aexit, "&File"
 
     def action_continuous_shooter(self):
+        """
+        Inicia e para o modo manual
+        """
         actionStart = QtWidgets.QAction('&Start', self)
         actionStop = QtWidgets.QAction('&Stop', self)
 
@@ -90,6 +100,9 @@ class Main(QtWidgets.QMainWindow):
         return actionStart, actionStop
 
     def action_ephemeris_shooter(self):
+        """
+        Inicia e para o modo automatico
+        """
         actionStart = QtWidgets.QAction('&Start', self)
         actionStop = QtWidgets.QAction('&Stop', self)
 

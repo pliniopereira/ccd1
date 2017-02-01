@@ -9,10 +9,12 @@ from src.utils.camera import SbigDriver
 
 
 class SThread(QtCore.QThread):
-    '''
-    Roda em paralelo, manda tirar as fotos.
-    '''
-
+    """
+    Threads são fluxos de programas que executam em paralelo dentro de uma aplicação, isto é,\
+    uma ramificação de uma parte da aplicação que é executada de forma independente e\
+    escalonada independentemente do fluxo inicial da aplicação.
+    Fonte: http://imasters.com.br/artigo/20127/py/threads-em-python/?trace=1519021197&source=single
+    """
     def __init__(self):
         super(SThread, self).__init__()
         self.lock = Locker()

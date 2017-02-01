@@ -447,6 +447,10 @@ def set_png(filename, newname, get_level1, get_level2):
 
 
 def retorna_imagem(name_png):
+    """
+    :param name_png: recebe imagem png
+    :return:
+    """
     img = Image.open(name_png)
     img.show()
 

@@ -12,6 +12,9 @@ sys.path.append(os.path.dirname(os.getcwd()))
 # Initiating the application
 try:
     app = QtWidgets.QApplication(sys.argv)
+    '''
+    acessa a classe mainWindow/main.py para criacao da interface
+    '''
     ex = Main()
     ex.show()
     sys.exit(app.exec_())
