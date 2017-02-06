@@ -10,8 +10,8 @@ do diretório onde as imagens serão salvas e seus respectivos nomes.
 
 ## Recursos:
 
-<li><a href="https://github.com/pliniopereira/ccd10/blob/master/INSTALACAO.md">Manual de instalação</a></li>
-<li><a href="https://github.com/pliniopereira/ccd10/blob/master/MANUAL.md">Manual de uso</a></li>
+<li><a href="https://github.com/pliniopereira/ccd10/blob/master/MANUALDEINSTALACAO.md">Manual de instalação</a></li>
+<li><a href="https://github.com/pliniopereira/ccd10/blob/master/MANUALDOUSUARIO.md">Manual do usuário</a></li>
 <br>
 
 -----

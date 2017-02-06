@@ -1,4 +1,4 @@
-Manual para uso do Manager CCD10.
+Manual do usuário do Manager CCD10.
 
 ---
 

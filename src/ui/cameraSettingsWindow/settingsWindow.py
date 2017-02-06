@@ -11,7 +11,7 @@ from src.utils.camera.SbigDriver import (getlinkstatus)
 
 class SettingsWindow(QtWidgets.QWidget):
     '''
-    cria os campos e espaços no menu settings window
+    Cria os campos e espaços no menu settings window
     '''
     def __init__(self, parent=None):
         super(SettingsWindow, self).__init__(parent)
@@ -143,7 +143,6 @@ class SettingsWindow(QtWidgets.QWidget):
     def take_one_photo(self):
         try:
             info = self.get_camera_settings()
-            print(info)
             if int(info[8]) == 1:
                 self.console.raise_text("Taking dark photo", 1)
                 self.one_photo.start()
@@ -151,7 +150,6 @@ class SettingsWindow(QtWidgets.QWidget):
                 self.console.raise_text("Taking photo", 1)
                 self.one_photo.start()
         except Exception:
-            print("MMMMMMMMMMMMMMMMMMMMMMMMMMMMM")
             self.console.raise_text("Not possible taking photo", 1)
 
     def func_cancel(self):
