@@ -15,6 +15,10 @@ from scipy.misc import toimage
 from src.utils.camera import SbigLib
 from src.utils.camera import SbigStructures
 
+"""
+Faz a comunicação do software com a camera sbig, os comandos vem da classe camera.main.
+"""
+
 # Load Driver (DLL)
 try:
     if sys.platform.startswith("linux"):
