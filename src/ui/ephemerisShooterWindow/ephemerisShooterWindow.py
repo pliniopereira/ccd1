@@ -4,6 +4,9 @@ from src.controller.camera import Camera
 
 
 class EphemerisShooterWindow(QtWidgets.QWidget):
+    """
+    cria o modo automatico no item connection no Toolbar
+    """
     def __init__(self, parent=None):
         super(EphemerisShooterWindow, self).__init__(parent)
         self.cam = Camera()

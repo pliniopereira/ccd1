@@ -7,6 +7,13 @@ from src.utils.camera.SbigDriver import (establishinglink, open_deviceusb, open_
 
 
 class CameraQThread(QtCore.QThread):
+    """
+    Threads são fluxos de programas que executam em paralelo dentro de uma aplicação, isto é,\
+    uma ramificação de uma parte da aplicação que é executada de forma independente e\
+    escalonada independentemente do fluxo inicial da aplicação.
+    Fonte: http://imasters.com.br/artigo/20127/py/threads-em-python/?trace=1519021197&source=single
+    Essa thread controla a camera
+    """
     connectSignal = QtCore.pyqtSignal()
     disconnectSignal = QtCore.pyqtSignal()
     fanOnSignal = QtCore.pyqtSignal()
