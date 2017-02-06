@@ -15,7 +15,7 @@ def set_width(*s):
 
 class Shooter(QtWidgets.QWidget):
     """
-        Class for Taking photo Widget
+    Class for Taking photo Widget
     """
 
     def __init__(self, parent=None):

@@ -143,13 +143,15 @@ class SettingsWindow(QtWidgets.QWidget):
     def take_one_photo(self):
         try:
             info = self.get_camera_settings()
-            if int(info[6]) == 1:
+            print(info)
+            if int(info[8]) == 1:
                 self.console.raise_text("Taking dark photo", 1)
                 self.one_photo.start()
             else:
                 self.console.raise_text("Taking photo", 1)
                 self.one_photo.start()
         except Exception:
+            print("MMMMMMMMMMMMMMMMMMMMMMMMMMMMM")
             self.console.raise_text("Not possible taking photo", 1)
 
     def func_cancel(self):
