@@ -6,5 +6,5 @@ get_level2=0.1
 prefixo=OH
 temperature_camera=20
 tempo_exposicao=1
-tempo_fotos=10
+tempo_fotos=1
 time_cooling=20

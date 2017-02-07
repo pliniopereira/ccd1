@@ -213,8 +213,8 @@ class Camera(metaclass=Singleton):
     def start_one_photo(self):
         try:
             self.continuousShooterThread.one_photo = True
-            self.continuousShooterThread.start()
             self.continuousShooterThread.start_continuous_shooter()
+            self.continuousShooterThread.start()
         except Exception as e:
             print(e)
 
