@@ -63,7 +63,6 @@ class ContinuousShooterThread(QtCore.QThread):
         self.count = 1
 
     def stop_one_photo(self):
-        self.console.raise_text("Photo took", 1)
         self.one_photo = False
         self.wait_temperature = False
         self.continuous = False
