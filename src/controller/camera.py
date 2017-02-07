@@ -210,6 +210,18 @@ class Camera(metaclass=Singleton):
         self.console.raise_text("Waiting temperature to " + str(self.aux_temperature) + "°C", 2)
 
     # Shooters
+    def start_one_photo(self):
+        try:
+            if getlinkstatus() is True:
+                self.shooter_mode()
+                self.continuousShooterThread.start_continuous_shooter()
+                self.continuousShooterThread.start()
+                self.continuousShooterThread.stop_continuous_shooter()
+            else:
+                self.console.raise_text("The camera is not connected", 3)
+        except Exception as e:
+            print(e)
+
     def start_taking_photo(self):
         try:
             if getlinkstatus() is True:

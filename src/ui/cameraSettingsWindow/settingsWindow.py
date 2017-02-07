@@ -100,7 +100,7 @@ class SettingsWindow(QtWidgets.QWidget):
         self.button_clear.clicked.connect(self.clear_all)
 
         self.btn_one_photo = QtWidgets.QPushButton('Take Photo', self)
-        self.btn_one_photo.clicked.connect(self.take_one_photo)
+        self.btn_one_photo.clicked.connect(self.camera.start_one_photo)
 
         self.tempButton = QtWidgets.QPushButton("Set Temp", self)
         self.tempButton.clicked.connect(self.btn_temperature)
