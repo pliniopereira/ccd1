@@ -212,13 +212,9 @@ class Camera(metaclass=Singleton):
     # Shooters
     def start_one_photo(self):
         try:
-            if getlinkstatus() is True:
-                self.shooter_mode()
-                self.continuousShooterThread.start_continuous_shooter()
-                self.continuousShooterThread.start()
-                self.continuousShooterThread.stop_continuous_shooter()
-            else:
-                self.console.raise_text("The camera is not connected", 3)
+            self.continuousShooterThread.one_photo = True
+            self.continuousShooterThread.start()
+            self.continuousShooterThread.start_continuous_shooter()
         except Exception as e:
             print(e)
 
@@ -268,6 +264,7 @@ class Camera(metaclass=Singleton):
         self.console.raise_text("Observation Finalized", 1)
         self.standby_mode()
         self.continuousShooterThread.wait_temperature = False
+        self.continuousShooterThread.one_photo = False
         self.ephemerisShooterThread.wait_temperature = False
         self.ephemerisShooterThread.continuousShooterThread.wait_temperature = False
         self.temp_contador_manual = 0
