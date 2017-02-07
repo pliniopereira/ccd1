@@ -1,0 +1,17 @@
+[geographic_options]
+elevation=350
+latitude=-22.7
+longitude=-45.0
+pressure=1000
+temperature=10
+
+[site_options]
+imager_id=Sbig
+project_name=All-Sky
+site_id=SJC
+
+[sun_and_moon]
+ignore_lunar_position=false
+max_lunar_elevation=20
+max_lunar_phase=10
+max_solar_elevation=-3

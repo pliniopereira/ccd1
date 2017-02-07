@@ -34,6 +34,3 @@
 # Spyder project settings
 # Rope project settings
 .idea/
-/src/camera
-/src/config
-/src/system

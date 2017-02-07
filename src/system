@@ -1,0 +1,7 @@
+[General]
+GNU_linux_startup=true
+images_path=/home/cristiano/Documentos/CCD_All-Sky
+log_path=/home/cristiano/Documentos/Logs
+project_path=
+save_log_file=true
+windows_startup=true
