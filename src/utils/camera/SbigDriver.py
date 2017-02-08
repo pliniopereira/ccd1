@@ -422,27 +422,39 @@ def set_png(filename, newname, get_level1, get_level2):
     print("Opening filename")
     fits_file = fits.open(filename)
 
+    img = fits_file[0].data[200:500, 200:500]
+
+    fits_file[0].data = img
+
+    if os.path.exists(filename): os.remove(filename)
+    fits.writeto(filename, img)
+
+    #fits.writeto(filename, img)
+
+    fits_file = fits.open(filename)
+
+
     try:
         print("tricat of set_png")
         img = toimage(fits_file[0].data)
+        '''
+        img = fits_file[0].data[200:500, 200:500]
 
-        im2 = fits_file[0].data
+        img = toimage(fits_file[0].data[200:500, 200:500])
+        '''
+
+        im2 = img
 
         variavel = get_level(im2, get_level1, get_level2)
 
-
         im2 = bytscl(fits_file[0].data, variavel[1], variavel[0])
-        #im2 = toimage(im2)
         img.save(newname)
 
         im3 = toimage(im2)
         im3.save(newname)
 
-
         resize_image_512x512(newname)
         draw_image(newname)
-        #retorna_imagem(newname)
-        #img.show()
 
     except Exception as e:
         print("Exception -> {}".format(e))
@@ -791,7 +803,9 @@ def photoshoot(etime, pre, binning, dark_photo, get_level1, get_level2):
         os.unlink(fitsname)
     except OSError:
         pass
-
+    '''
+    Create a new FITS file using the supplied data/header.
+    '''
     fits.writeto(fitsname, img)
     #src.utils.camera.SbigDriver.site
     print("\nGRAB IMAGE - End Readout\n")
