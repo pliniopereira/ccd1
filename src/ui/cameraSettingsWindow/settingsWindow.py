@@ -18,14 +18,11 @@ class SettingsWindow(QtWidgets.QWidget):
         self.cam = SettingsCamera()
         self.camera = Camera()
         self.console = ConsoleThreadOutput()
-        #self.a_temp_regulation = TempRegulation(self)
         self.create_cam_widgets()
         self.p = parent
         self.fan = Fan(self.fanButton)
-
-        #self.button_clear = QtWidgets.QPushButton('Clear', self)
-
         self.setField_temperature = QtWidgets.QLineEdit(self)
+
         self.setting_values()
 
         self.one_photo = SThread()
@@ -39,6 +36,10 @@ class SettingsWindow(QtWidgets.QWidget):
                                  set_hbox(self.dark, self.close_open),
                                  set_hbox(self.getlevel1, self.getlevel1l),
                                  set_hbox(self.getlevel2, self.getlevel2l),
+                                 set_hbox(self.crop_xi, self.getcropxi_l),
+                                 set_hbox(self.crop_xf, self.getcropxf_l),
+                                 set_hbox(self.crop_yi, self.getcropyi_l),
+                                 set_hbox(self.crop_yf, self.getcropyf_l),
                                  set_hbox(self.btn_one_photo, self.tempButton, self.fanButton, stretch2=1),
                                  set_hbox(self.buttonok, self.button_clear, self.buttoncancel, stretch2=1)))
 
@@ -52,9 +53,11 @@ class SettingsWindow(QtWidgets.QWidget):
 
     def setting_values(self):
         info = self.get_values()
-        self.set_values(info[0], info[1], info[2], info[3], info[4], info[5], info[6], info[7], info[8])
+        self.set_values(info[0], info[1], info[2], info[3], info[4], info[5], info[6], info[7], info[8], info[9],\
+                        info[10], info[11], info[12])
 
-    def set_values(self, temperature_camera, prefixo, exposicao, binning, tempo_entre_fotos, time_colling, get_level1, get_level2, dark_photo):
+    def set_values(self, temperature_camera, prefixo, exposicao, binning, tempo_entre_fotos, time_colling, get_level1,\
+                   get_level2, dark_photo, crop_xi, crop_xf, crop_yi, crop_yf):
         self.setField_temperature.setText(temperature_camera)
         self.prel.setText(prefixo)
         self.expl.setText(exposicao)
@@ -71,8 +74,14 @@ class SettingsWindow(QtWidgets.QWidget):
         self.time_colling.setText(time_colling)
         self.combo.setCurrentIndex(b)
         self.close_open.setCurrentIndex(open_or_close)
+
         self.getlevel1l.setText(get_level1)
         self.getlevel2l.setText(get_level2)
+
+        self.getcropxi_l.setText(crop_xi)
+        self.getcropxf_l.setText(crop_xf)
+        self.getcropyi_l.setText(crop_yi)
+        self.getcropyf_l.setText(crop_yf)
 
     def create_cam_widgets(self):
         self.setField_temperature_label = QtWidgets.QLabel("Temperature(°C):", self)
@@ -95,6 +104,15 @@ class SettingsWindow(QtWidgets.QWidget):
 
         self.getlevel2 = QtWidgets.QLabel("Image contrast:       top level:", self)
         self.getlevel2l = QtWidgets.QLineEdit(self)
+
+        self.crop_xi = QtWidgets.QLabel("Crop fit: xi:", self)
+        self.getcropxi_l = QtWidgets.QLineEdit(self)
+        self.crop_xf = QtWidgets.QLabel("Crop fit: xf:", self)
+        self.getcropxf_l = QtWidgets.QLineEdit(self)
+        self.crop_yi = QtWidgets.QLabel("Crop fit: yi:", self)
+        self.getcropyi_l = QtWidgets.QLineEdit(self)
+        self.crop_yf = QtWidgets.QLabel("Crop fit: yf:", self)
+        self.getcropyf_l = QtWidgets.QLineEdit(self)
 
         self.button_clear = QtWidgets.QPushButton('Clear', self)
         self.button_clear.clicked.connect(self.clear_all)
@@ -123,9 +141,11 @@ class SettingsWindow(QtWidgets.QWidget):
     def button_ok_func(self):
         try:
             # Saving the Settings
-            self.cam.set_camera_settings(self.setField_temperature.text(), self.prel.text(), self.expl.text(),\
-                                         self.combo.currentIndex(), self.tempo_fotos.text(), self.time_colling.text(), \
-                                         self.getlevel1l.text(), self.getlevel2l.text(), self.close_open.currentIndex())
+            self.cam.set_camera_settings(self.setField_temperature.text(), self.prel.text(), self.expl.text(),
+                                         self.combo.currentIndex(), self.tempo_fotos.text(), self.time_colling.text(),
+                                         self.getlevel1l.text(), self.getlevel2l.text(), self.close_open.currentIndex(),
+                                         self.getcropxi_l.text(), self.getcropxf_l.text(),
+                                         self.getcropyi_l.text(), self.getcropyf_l.text())
             self.cam.save_settings()
             self.console.raise_text("Camera settings successfully saved!", 1)
         except Exception as e:

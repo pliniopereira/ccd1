@@ -1,5 +1,9 @@
 [General]
 binning=0
+crop_xf=2
+crop_xi=1
+crop_yf=4
+crop_yi=3
 dark_photo=0
 get_level1=0.9
 get_level2=0.1

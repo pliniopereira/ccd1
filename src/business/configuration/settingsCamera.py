@@ -16,7 +16,7 @@ class SettingsCamera:
         self._settings.sync()
 
     def set_camera_settings(self, temperature_camera, pre, exp, bin, time, time_cooling, get_level1,\
-                            get_level2, dark_photo):
+                            get_level2, dark_photo, crop_xi, crop_xf, crop_yi, crop_yf):
         """
         :param temperature_camera: seta o valor que a camera deve atingir para começo das observacoes
         :param pre: prefixo, dá nome ao path que vai ser criado no comeco das observacoes\
@@ -30,7 +30,12 @@ class SettingsCamera:
         :param get_level1:  nível inferior normalizado para ajuste de contraste
         :param get_level2: nível superior normalizado para ajuste de contraste
         :param dark_photo: valor guardado que defini se a foto tirada terá o shooter fechada \
-        ou aberta
+        ou aberta.
+        :param crop_xi:
+        :param crop_xf:
+        :param crop_yi:
+        :param crop_yf:
+        :return:
         """
         self._settings.setValue(c.TEMPERATURE, temperature_camera)
         self._settings.setValue(c.PREFIXO, pre)
@@ -41,11 +46,17 @@ class SettingsCamera:
         self._settings.setValue(c.GET_LEVEL1, get_level1)
         self._settings.setValue(c.GET_LEVEL2, get_level2)
         self._settings.setValue(c.DARK_PHOTO, dark_photo)
+        self._settings.setValue(c.CROP_X_AXIS_XI, crop_xi)
+        self._settings.setValue(c.CROP_X_AXIS_XF, crop_xf)
+        self._settings.setValue(c.CROP_Y_AXIS_YI, crop_yi)
+        self._settings.setValue(c.CROP_Y_AXIS_YF, crop_yf)
 
     def get_camera_settings(self):
         return self._settings.value(c.TEMPERATURE), self._settings.value(c.PREFIXO), self._settings.value(c.EXPOSICAO),\
-               self._settings.value(c.BINNING), self._settings.value(c.TIMEPHOTO), self._settings.value(c.TIMECOOLING), \
-               self._settings.value(c.GET_LEVEL1), self._settings.value(c.GET_LEVEL2), self._settings.value(c.DARK_PHOTO)
+               self._settings.value(c.BINNING), self._settings.value(c.TIMEPHOTO), self._settings.value(c.TIMECOOLING),\
+               self._settings.value(c.GET_LEVEL1), self._settings.value(c.GET_LEVEL2), self._settings.value(c.DARK_PHOTO),\
+               self._settings.value(c.CROP_X_AXIS_XI), self._settings.value(c.CROP_X_AXIS_XF),\
+               self._settings.value(c.CROP_Y_AXIS_YI), self._settings.value(c.CROP_Y_AXIS_YF)
 
     def get_filepath(self):
         return self._settings.value(c.FILENAME)
