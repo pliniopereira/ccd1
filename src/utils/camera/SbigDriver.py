@@ -421,27 +421,9 @@ def set_png(filename, newname, get_level1, get_level2):
     '''
     print("Opening filename")
     fits_file = fits.open(filename)
-
-    img = fits_file[0].data[200:500, 200:500]
-
-    fits_file[0].data = img
-
-    if os.path.exists(filename): os.remove(filename)
-    fits.writeto(filename, img)
-
-    #fits.writeto(filename, img)
-
-    fits_file = fits.open(filename)
-
-
     try:
         print("tricat of set_png")
         img = toimage(fits_file[0].data)
-        '''
-        img = fits_file[0].data[200:500, 200:500]
-
-        img = toimage(fits_file[0].data[200:500, 200:500])
-        '''
 
         im2 = img
 
@@ -805,9 +787,11 @@ def photoshoot(etime, pre, binning, dark_photo, get_level1, get_level2):
         pass
     '''
     Create a new FITS file using the supplied data/header.
+    Crop fit image
     '''
+    img = img[200:500, 200:500]  # croping image
     fits.writeto(fitsname, img)
-    #src.utils.camera.SbigDriver.site
+
     print("\nGRAB IMAGE - End Readout\n")
 
     cin = SbigStructures.EndReadoutParams
