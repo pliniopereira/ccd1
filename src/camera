@@ -1,7 +1,7 @@
 [General]
 binning=0
 crop_xf=500
-crop_xi=200
+crop_xi=50
 crop_yf=500
 crop_yi=200
 dark_photo=0

@@ -40,9 +40,7 @@ class SThread(QtCore.QThread):
         '''
         settings = SettingsCamera()
         info = settings.get_camera_settings()
-        print("\n\n")
-        print(info)
-        print("\n\n")
+
         return info
 
     def take_dark(self):
@@ -111,8 +109,6 @@ class SThread(QtCore.QThread):
             self.get_axis_yi = info[11]
             self.get_axis_yf = info[12]
 
-
-
     def run(self):
         self.set_etime_pre_binning()
         self.lock.set_acquire()
@@ -133,7 +129,7 @@ class SThread(QtCore.QThread):
 
             self.img = Image(self.info[0], self.info[1], self.info[2], self.info[3], self.info[4])
         except Exception as e:
-            self.img = Image('','','','','')
+            self.img = Image('', '', '', '', '')
         return self.img
 
     def get_image_info(self):
