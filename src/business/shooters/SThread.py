@@ -33,9 +33,16 @@ class SThread(QtCore.QThread):
         info[5] = Image contrast: bottom
         info[6] = Image contrast: top level
         info[7] = Booleano para decidir se a foto é dark
+        info[8] = axis_xi inicial
+        info[9] = axis_xf final
+        info[10] = axis_yi inicial
+        info[11] = axis_yf final
         '''
         settings = SettingsCamera()
         info = settings.get_camera_settings()
+        print("\n\n")
+        print(info)
+        print("\n\n")
         return info
 
     def take_dark(self):
@@ -46,7 +53,10 @@ class SThread(QtCore.QThread):
         try:
             self.set_etime_pre_binning()
             self.lock.set_acquire()
-            self.info = SbigDriver.photoshoot(self.etime, self.pre, self.b, 1, self.get_level1, self.get_level2)
+            self.info = SbigDriver.photoshoot(self.etime, self.pre, self.b, 1,
+                                              self.get_level1, self.get_level2,
+                                              self.get_axis_xi, self.get_axis_xf,
+                                              self.get_axis_yi, self.get_axis_yf)
             self.init_image()
         except Exception as e:
             print(e)
@@ -65,6 +75,11 @@ class SThread(QtCore.QThread):
 
             self.get_level1 = float(info[6])
             self.get_level2 = float(info[7])
+
+            self.get_axis_xi = int(info[9])
+            self.get_axis_xf = int(info[10])
+            self.get_axis_yi = int(info[11])
+            self.get_axis_yf = int(info[12])
 
             self.etime = float(info[2])
             if self.etime <= 0.12:
@@ -91,13 +106,20 @@ class SThread(QtCore.QThread):
                 self.pre = str(info[1])
             else:
                 self.pre = 'pre'
+            self.get_axis_xi = info[9]
+            self.get_axis_xf = info[10]
+            self.get_axis_yi = info[11]
+            self.get_axis_yf = info[12]
+
+
 
     def run(self):
         self.set_etime_pre_binning()
         self.lock.set_acquire()
         try:
-            self.info = SbigDriver.photoshoot(self.etime, self.pre, self.b, self.dark_photo, self.get_level1,\
-                                              self.get_level2)
+            self.info = SbigDriver.photoshoot(self.etime, self.pre, self.b, self.dark_photo, self.get_level1,
+                                              self.get_level2, self.get_axis_xi, self.get_axis_xf, self.get_axis_yi,
+                                              self.get_axis_yf)
             self.init_image()
         except Exception as e:
             print(e)

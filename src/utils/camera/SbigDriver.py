@@ -617,7 +617,8 @@ def get_level(im2, sref_min, sref_max):
     return slevel
 
 
-def photoshoot(etime, pre, binning, dark_photo, get_level1, get_level2):
+def photoshoot(etime, pre, binning, dark_photo, get_level1, get_level2,
+               get_axis_xi, get_axis_xf, get_axis_yi, get_axis_yf):
     '''
     :param etime: tempo de exposição
     :param pre: prefixo do nome do arquivo
@@ -625,6 +626,11 @@ def photoshoot(etime, pre, binning, dark_photo, get_level1, get_level2):
     :param dark_photo: shooter fechado = 1 ou aberto = 0
     :param get_level1: limite inferior para auto contraste
     :param get_level2: limite superior para auto contraste
+    :param get_axis_xi:
+    :param get_axis_xf:
+    :param get_axis_yi:
+    :param get_axis_yf:
+    :return:
     '''
     # open_driver()
     # open_deviceusb()
@@ -789,7 +795,8 @@ def photoshoot(etime, pre, binning, dark_photo, get_level1, get_level2):
     Create a new FITS file using the supplied data/header.
     Crop fit image
     '''
-    img = img[200:500, 200:500]  # croping image
+    img = img[get_axis_xi:get_axis_xf, get_axis_yi:get_axis_yf]  # croping image
+
     fits.writeto(fitsname, img)
 
     print("\nGRAB IMAGE - End Readout\n")
