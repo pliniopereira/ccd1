@@ -16,7 +16,10 @@ class CCDInfo(QtWidgets.QWidget):
 
     def init_widgets(self):
         self.title = QtWidgets.QLabel("CCD Information", self)
-        """ Function to initiate the Widgets of CCD Information """
+
+        """
+        Function to initiate the Widgets of CCD Information
+        """
         # Camera Firmware
         lf = QtWidgets.QLabel("Firmware:", self)
 
@@ -26,7 +29,12 @@ class CCDInfo(QtWidgets.QWidget):
         # Camera Name
         ln = QtWidgets.QLabel("Camera:", self)
 
-        self.cam.set_firmware_and_model_fields(lf, ln)
+        pixels_field = QtWidgets.QLabel(self)
+
+        X_Pixels = QtWidgets.QLabel("     X     Pixels:", self)
+        Y_Pixels = QtWidgets.QLabel(self)
+
+        self.cam.set_firmware_and_model_fields(lf, ln, X_Pixels, Y_Pixels)
         # LineEdit to show camera model
         cn = QtWidgets.QLabel(self)
         cn.setAlignment(QtCore.Qt.AlignCenter)
@@ -34,7 +42,8 @@ class CCDInfo(QtWidgets.QWidget):
         # Setting the layout
         self.setLayout(set_lvbox(set_hbox(self.title),
                                  set_hbox(lf, tfirm),
-                                 set_hbox(ln, cn)))
+                                 set_hbox(ln, cn),
+                                 set_hbox(X_Pixels, Y_Pixels, pixels_field)))
 
     def config_widgets(self):
         self.title.setAlignment(QtCore.Qt.AlignCenter)

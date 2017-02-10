@@ -375,7 +375,11 @@ def is_fanning():
 
 
 def ccdinfo():
+    '''
+    :return:
+    '''
     for ccd in SbigLib.CCD_INFO_REQUEST.CCD_INFO_IMAGING.value, SbigLib.CCD_INFO_REQUEST.CCD_INFO_TRACKING.value:
+
         cin = SbigStructures.ReadOutInfo
         cout = SbigStructures.GetCCDInfoResults0
         udrv.SBIGUnivDrvCommand.argtypes = [c_ushort, POINTER(cin), POINTER(cout)]
@@ -383,7 +387,14 @@ def ccdinfo():
         cout = cout()
         udrv.SBIGUnivDrvCommand(SbigLib.PAR_COMMAND.CC_GET_CCD_INFO.value, byref(cin), byref(cout))
 
-    return cout.firmwareVersion, cout.cameraType, cout.name
+        for i_mode in range(cout.readoutModes):
+            if ccd == SbigLib.CCD_INFO_REQUEST.CCD_INFO_IMAGING.value and i_mode == 0:
+                readout_mode = [
+                    cout.readoutInfo[i_mode].mode, cout.readoutInfo[i_mode].width, cout.readoutInfo[i_mode].height,
+                    cout.readoutInfo[i_mode].width, cout.readoutInfo[i_mode].gain, cout.readoutInfo[i_mode].pixel_width,
+                    cout.readoutInfo[i_mode].pixel_height]
+
+    return cout.firmwareVersion, cout.cameraType, cout.name, readout_mode[1],  readout_mode[2]
 
 
 def set_header(filename):
@@ -657,18 +668,14 @@ def photoshoot(etime, pre, binning, dark_photo, get_level1, get_level2,
         #       cout.cameraType, "\nname", cout.name, "\nReadoutModes: ", cout.readoutModes)
 
         for i_mode in range(cout.readoutModes):
-
-            # print(cout.readoutInfo[i_mode].mode, cout.readoutInfo[i_mode].width, cout.readoutInfo[i_mode].height,
-            #       cout.readoutInfo[i_mode].width, cout.readoutInfo[i_mode].gain, cout.readoutInfo[i_mode].pixel_width,
-            #       cout.readoutInfo[i_mode].pixel_height)
             if ccd == SbigLib.CCD_INFO_REQUEST.CCD_INFO_IMAGING.value and i_mode == 0:
+                print(type(i_mode))
                 readout_mode = [
                     cout.readoutInfo[i_mode].mode, cout.readoutInfo[i_mode].width, cout.readoutInfo[i_mode].height,
                     cout.readoutInfo[i_mode].width, cout.readoutInfo[i_mode].gain, cout.readoutInfo[i_mode].pixel_width,
                     cout.readoutInfo[i_mode].pixel_height]  # STORE FIRST MODE OF IMAGING CCD FOR EXPOSURE TEST
 
-                # Setting the Gain and Bining with Width and Height
-
+    # Setting the Gain and Bining with Width and Height
     v_read = 0
     v_h = readout_mode[2]
     v_w = readout_mode[1]

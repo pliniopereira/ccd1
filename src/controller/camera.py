@@ -30,6 +30,9 @@ class Camera(metaclass=Singleton):
         # Campos da janela principal para as informações da câmera
         self.firmware_field = None
         self.model_field = None
+        self.valor_pixels1 = None
+        self.valor_pixels2 = None
+
 
         self.main = Status()
         self.now_plus_10 = datetime.now()
@@ -82,18 +85,21 @@ class Camera(metaclass=Singleton):
         self.commands.finished.connect(self.eita)
         self.commands.connectSignal.connect(self.connect_mainwindow_update)
 
-    def get_firmware_and_model(self):
+    def get_firmware_and_model_and_pixels(self):
         info = self.get_info()
-        return str(info[0]), str(info[2])[2:len(str(info[2]))-1]
+        return str(info[0]), str(info[2])[2:len(str(info[2]))-1], str(info[-2]), str(info[-1])
 
-    def set_firmware_and_model_fields(self, firmwareField, modelField):
+    def set_firmware_and_model_fields(self, firmwareField, modelField, X_Pixels, Y_Pixels):
         self.firmware_field = firmwareField
         self.model_field = modelField
+        self.valor_pixels1 = X_Pixels
+        self.valor_pixels2 = Y_Pixels
 
     def set_firmware_and_model_values(self):
-        firmware, model = self.get_firmware_and_model()
+        firmware, model, x_pixels, y_pixels = self.get_firmware_and_model_and_pixels()
         self.firmware_field.setText("Firmware: " + firmware)
         self.model_field.setText("Camera: " + model)
+        self.valor_pixels1.setText(x_pixels + " X " + y_pixels + " Pixels")
 
     def clear_firmware_and_model_values(self):
         self.firmware_field.setText("Firmware: ")
