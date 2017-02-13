@@ -685,7 +685,6 @@ def photoshoot(etime, pre, binning, dark_photo, get_level1, get_level2,
 
         for i_mode in range(cout.readoutModes):
             if ccd == SbigLib.CCD_INFO_REQUEST.CCD_INFO_IMAGING.value and i_mode == 0:
-                print(type(i_mode))
                 readout_mode = [
                     cout.readoutInfo[i_mode].mode, cout.readoutInfo[i_mode].width, cout.readoutInfo[i_mode].height,
                     cout.readoutInfo[i_mode].width, cout.readoutInfo[i_mode].gain, cout.readoutInfo[i_mode].pixel_width,
@@ -822,9 +821,14 @@ def photoshoot(etime, pre, binning, dark_photo, get_level1, get_level2,
     '''
     try:
         if not ignore_crop:
-            img = img[get_axis_yi:get_axis_yf, get_axis_xi:get_axis_xf]  # croping image
-    except:
-        print("Not possible croping image.")
+            # x = width
+            # y = height
+            print("Cropping image.")
+            print("Width: xi = " + str(get_axis_xi) + " xf = " + str(get_axis_xf))
+            print("Height: yi = " + str(get_axis_yi) + " yf = " + str(get_axis_yf))
+            img = img[get_axis_yi:get_axis_yf, get_axis_xi:get_axis_xf]  # cropping image
+    except Exception as e:
+        print("Not possible cropping image ->" + str(e))
 
     fits.writeto(fitsname, img)
 

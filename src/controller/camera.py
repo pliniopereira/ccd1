@@ -106,8 +106,8 @@ class Camera(metaclass=Singleton):
 
     def get_info(self):
         '''
-            Function to get the CCD Info
-            This function will return [CameraFirmware, CameraType, CameraName, Pixels]
+        Function to get the CCD Info
+        This function will return [CameraFirmware, CameraType, CameraName, Pixels]
         '''
         ret = None
         self.lock.set_acquire()
@@ -218,6 +218,7 @@ class Camera(metaclass=Singleton):
 
     # Shooters
     def start_one_photo(self):
+
         try:
             self.continuousShooterThread.one_photo = True
             self.continuousShooterThread.start_continuous_shooter()
