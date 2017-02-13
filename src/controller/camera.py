@@ -210,6 +210,8 @@ class Camera(metaclass=Singleton):
         self.fan.set_fan_off()
 
     def shooter_mode(self):
+        info_ini = self.get_camera_settings_ini()
+        self.aux_temperature = int(info_ini[0])
         self.set_temperature(int(self.aux_temperature))
         self.fan.set_fan_on()
         self.console.raise_text("Waiting temperature to " + str(self.aux_temperature) + "°C", 2)
