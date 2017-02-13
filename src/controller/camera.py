@@ -33,7 +33,6 @@ class Camera(metaclass=Singleton):
         self.valor_pixels_x = None
         self.valor_pixels_y = None
 
-
         self.main = Status()
         self.now_plus_10 = datetime.now()
         self.settedhour = datetime.now()
@@ -96,7 +95,7 @@ class Camera(metaclass=Singleton):
         self.valor_pixels_y = Y_Pixels
 
     def set_firmware_and_model_values(self):
-        firmware, model, x_pixels, y_pixels = self.get_firmware_and_model_and_pixels()
+        firmware, model, y_pixels, x_pixels = self.get_firmware_and_model_and_pixels()
         self.firmware_field.setText("Firmware: " + firmware)
         self.model_field.setText("Camera: " + model)
         self.valor_pixels_x.setText(x_pixels + " X " + y_pixels + " Pixels")
@@ -108,7 +107,7 @@ class Camera(metaclass=Singleton):
     def get_info(self):
         '''
             Function to get the CCD Info
-            This function will return [CameraFirmware, CameraType, CameraName]
+            This function will return [CameraFirmware, CameraType, CameraName, Pixels]
         '''
         ret = None
         self.lock.set_acquire()
@@ -132,8 +131,8 @@ class Camera(metaclass=Singleton):
                 self.set_firmware_and_model_values()
 
                 '''
-                    Fan Field sera atualizado automaticamente
-                    atualizado pela thread de refresh temp.
+                Fan Field sera atualizado automaticamente
+                atualizado pela thread de refresh temp.
                 '''
                 # self.fan.refresh_fan_status()
                 return True

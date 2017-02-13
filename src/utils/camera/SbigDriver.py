@@ -637,6 +637,8 @@ def photoshoot(etime, pre, binning, dark_photo, get_level1, get_level2,
     :param dark_photo: shooter fechado = 1 ou aberto = 0
     :param get_level1: limite inferior para auto contraste
     :param get_level2: limite superior para auto contraste
+    x = width
+    y = height
     :param get_axis_xi:
     :param get_axis_xf:
     :param get_axis_yi:
@@ -676,6 +678,8 @@ def photoshoot(etime, pre, binning, dark_photo, get_level1, get_level2,
                     cout.readoutInfo[i_mode].pixel_height]  # STORE FIRST MODE OF IMAGING CCD FOR EXPOSURE TEST
 
     # Setting the Gain and Bining with Width and Height
+    # x = width
+    # y = height
     v_read = 0
     v_h = readout_mode[2]
     v_w = readout_mode[1]
@@ -802,7 +806,10 @@ def photoshoot(etime, pre, binning, dark_photo, get_level1, get_level2,
     Create a new FITS file using the supplied data/header.
     Crop fit image
     '''
-    img = img[get_axis_xi:get_axis_xf, get_axis_yi:get_axis_yf]  # croping image
+    try:
+        img = img[get_axis_yi:get_axis_yf, get_axis_xi:get_axis_xf]  # croping image
+    except:
+        print("Not possible croping image.")
 
     fits.writeto(fitsname, img)
 

@@ -1,14 +1,13 @@
-from PyQt5 import QtWidgets, QtGui
-import sys
-
+from PyQt5 import QtWidgets
 
 from src.business.configuration.settingsCamera import SettingsCamera
 from src.business.consoleThreadOutput import ConsoleThreadOutput
 from src.business.shooters.SThread import SThread
 from src.controller.camera import Camera
+from src.controller.commons.Locker import Locker
 from src.controller.fan import Fan
 from src.ui.commons.layout import set_lvbox, set_hbox
-from src.utils.camera.SbigDriver import (getlinkstatus)
+from src.utils.camera.SbigDriver import (ccdinfo, getlinkstatus)
 
 
 class SettingsWindow(QtWidgets.QWidget):
@@ -25,6 +24,8 @@ class SettingsWindow(QtWidgets.QWidget):
         self.fan = Fan(self.fanButton)
         self.setField_temperature = QtWidgets.QLineEdit(self)
 
+        self.lock = Locker()
+
         self.setting_values()
 
         self.one_photo = SThread()
@@ -38,7 +39,6 @@ class SettingsWindow(QtWidgets.QWidget):
                                  set_hbox(self.dark, self.close_open),
                                  set_hbox(self.contrast_msg),
                                  set_hbox(self.getlevel1, self.getlevel1l, self.getlevel2, self.getlevel2l),
-
                                  set_hbox(self.crop_msg),
                                  set_hbox(self.crop_xi, self.getcropxi_l, self.crop_xf, self.getcropxf_l),
                                  set_hbox(self.crop_yi, self.getcropyi_l, self.crop_yf, self.getcropyf_l),
@@ -49,6 +49,30 @@ class SettingsWindow(QtWidgets.QWidget):
         settings = SettingsCamera()
         info = settings.get_camera_settings()
         return info
+
+    def get_pixels(self):
+        info = self.get_info_pixels()
+        print("\n\n")
+        print(str(info[-2]))
+        print(str(info[-1]))
+        print("\n\n")
+
+        return int(info[-2]), int(info[-1])
+
+    def get_info_pixels(self):
+        '''
+        Function to get the CCD Info
+        This function will return [Pixels]
+        '''
+        ret = None
+        self.lock.set_acquire()
+        try:
+            ret = tuple(ccdinfo())
+        except Exception as e:
+            self.console.raise_text("Failed to get camera information.\n{}".format(e))
+        finally:
+            self.lock.set_release()
+        return ret
 
     def get_values(self):
         return self.cam.get_camera_settings()
@@ -144,12 +168,20 @@ class SettingsWindow(QtWidgets.QWidget):
 
     def button_ok_func(self):
         try:
+            y_pixels, x_pixels = self.get_pixels()
+
             # Saving the Settings
+            print("\n\n")
+            print(int(self.combo.currentIndex()))
+            print(x_pixels/(int(self.combo.currentIndex() + 1)))
+            print(y_pixels/(int(self.combo.currentIndex() + 1)))
+            print("\n\n")
 
             if int(self.getcropxi_l.text()) > int(self.getcropxf_l.text()) or\
-                            int(self.getcropyi_l.text()) > int(self.getcropyf_l.text()):
+                            int(self.getcropyi_l.text()) > int(self.getcropyf_l.text()) or\
+                            int(self.getcropxf_l.text()) >= x_pixels/(int(self.combo.currentIndex() + 1)) or \
+                            int(self.getcropyf_l.text()) >= y_pixels/(int(self.combo.currentIndex() + 1)):
                 self.console.raise_text("Wrong values for image crop.", 3)
-                self.alert_popup()
             else:
                 self.cam.set_camera_settings(self.setField_temperature.text(), self.prel.text(), self.expl.text(),
                                          self.combo.currentIndex(), self.tempo_fotos.text(), self.time_colling.text(),
