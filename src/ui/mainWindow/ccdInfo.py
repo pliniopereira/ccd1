@@ -31,7 +31,7 @@ class CCDInfo(QtWidgets.QWidget):
 
         pixels_field = QtWidgets.QLabel(self)
 
-        X_Pixels = QtWidgets.QLabel("     X     Pixels:", self)
+        X_Pixels = QtWidgets.QLabel("", self)
         Y_Pixels = QtWidgets.QLabel(self)
 
         self.cam.set_firmware_and_model_fields(lf, ln, X_Pixels, Y_Pixels)
