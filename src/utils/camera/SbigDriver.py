@@ -629,8 +629,21 @@ def get_level(im2, sref_min, sref_max):
 
 
 def photoshoot(etime, pre, binning, dark_photo, get_level1, get_level2,
-               get_axis_xi, get_axis_xf, get_axis_yi, get_axis_yf):
+               get_axis_xi, get_axis_xf, get_axis_yi, get_axis_yf, ignore_crop):
     '''
+    print("\n\n")
+    print(etime)
+    print(pre)
+    print(binning)
+    print(dark_photo)
+    print(get_level1)
+    print(get_level2)
+    print(get_axis_xi)
+    print(get_axis_xf)
+    print(get_axis_yi)
+    print(get_axis_yf)
+    print(ignore_crop)
+    print("\n\n")
     :param etime: tempo de exposição
     :param pre: prefixo do nome do arquivo
     :param binning: redução da imagem
@@ -643,6 +656,7 @@ def photoshoot(etime, pre, binning, dark_photo, get_level1, get_level2,
     :param get_axis_xf:
     :param get_axis_yi:
     :param get_axis_yf:
+    :param ignore_crop:
     :return:
     '''
     # open_driver()
@@ -807,7 +821,8 @@ def photoshoot(etime, pre, binning, dark_photo, get_level1, get_level2,
     Crop fit image
     '''
     try:
-        img = img[get_axis_yi:get_axis_yf, get_axis_xi:get_axis_xf]  # croping image
+        if not ignore_crop:
+            img = img[get_axis_yi:get_axis_yf, get_axis_xi:get_axis_xf]  # croping image
     except:
         print("Not possible croping image.")
 

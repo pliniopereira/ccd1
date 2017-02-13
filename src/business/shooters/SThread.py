@@ -28,15 +28,17 @@ class SThread(QtCore.QThread):
         info[0] = temperature_camera
         info[1] = prefixo/filter name
         info[2] = tempo_exposicao
-        info[3] = tempo_fotos(tempo entre fotos)
-        info[4] = time_cooling(CCD cooling time)
-        info[5] = Image contrast: bottom
-        info[6] = Image contrast: top level
-        info[7] = Booleano para decidir se a foto é dark
-        info[8] = axis_xi inicial
-        info[9] = axis_xf final
-        info[10] = axis_yi inicial
-        info[11] = axis_yf final
+        info[3] = binning
+        info[4] = tempo_fotos(tempo entre fotos)
+        info[5] = time_cooling(CCD cooling time)
+        info[6] = Image contrast: bottom
+        info[7] = Image contrast: top level
+        info[8] = Booleano para decidir se a foto é dark
+        info[9] = axis_xi inicial
+        info[10] = axis_xf final
+        info[11] = axis_yi inicial
+        info[12] = axis_yf final
+        info[13] = ignore_crop
         '''
         settings = SettingsCamera()
         info = settings.get_camera_settings()
@@ -54,7 +56,8 @@ class SThread(QtCore.QThread):
             self.info = SbigDriver.photoshoot(self.etime, self.pre, self.b, 1,
                                               self.get_level1, self.get_level2,
                                               self.get_axis_xi, self.get_axis_xf,
-                                              self.get_axis_yi, self.get_axis_yf)
+                                              self.get_axis_yi, self.get_axis_yf,
+                                              self.get_ignore_crop)
             self.init_image()
         except Exception as e:
             print(e)
@@ -71,43 +74,50 @@ class SThread(QtCore.QThread):
         try:
             info = self.get_camera_settings()
 
+            self.pre = str(info[1])
+
+            self.etime = float(info[2])
+            if self.etime <= 0.12:
+                self.etime = 0.12 * 100
+            elif self.etime >= 3600:
+                 self.etime = 3600 * 100
+            else:
+                self.etime = float(info[2]) * 100
+            self.etime = int(self.etime)
+
+            self.b = int(info[3])
+
             self.get_level1 = float(info[6])
             self.get_level2 = float(info[7])
+
+            self.dark_photo = int(info[8])
 
             self.get_axis_xi = int(info[9])
             self.get_axis_xf = int(info[10])
             self.get_axis_yi = int(info[11])
             self.get_axis_yf = int(info[12])
 
-            self.etime = float(info[2])
-            if self.etime <= 0.12:
-                self.etime = 0.12 * 100
-            elif self.etime >= 3600:
-                self.etime = 3600 * 100
-            else:
-                self.etime = float(info[2]) * 100
-            self.etime = int(self.etime)
-
-            self.pre = str(info[1])
-
-            self.b = int(info[3])
-
-            self.dark_photo = int(info[8])
+            self.get_ignore_crop = info[13]
 
         except Exception as e:
             print(e)
             self.etime = 100
+            self.b = 0
             self.dark_photo = 1
             self.get_level1 = 0.1
             self.get_level2 = 0.99
+
             if str(info[1]) != '':
                 self.pre = str(info[1])
             else:
                 self.pre = 'pre'
+
             self.get_axis_xi = info[9]
             self.get_axis_xf = info[10]
             self.get_axis_yi = info[11]
             self.get_axis_yf = info[12]
+
+            self.get_ignore_crop = True
 
     def run(self):
         self.set_etime_pre_binning()
@@ -115,7 +125,7 @@ class SThread(QtCore.QThread):
         try:
             self.info = SbigDriver.photoshoot(self.etime, self.pre, self.b, self.dark_photo, self.get_level1,
                                               self.get_level2, self.get_axis_xi, self.get_axis_xf, self.get_axis_yi,
-                                              self.get_axis_yf)
+                                              self.get_axis_yf, self.get_ignore_crop)
             self.init_image()
         except Exception as e:
             print(e)

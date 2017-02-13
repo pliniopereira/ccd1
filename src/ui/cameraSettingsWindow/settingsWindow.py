@@ -39,6 +39,7 @@ class SettingsWindow(QtWidgets.QWidget):
                                  set_hbox(self.dark, self.close_open),
                                  set_hbox(self.contrast_msg),
                                  set_hbox(self.getlevel1, self.getlevel1l, self.getlevel2, self.getlevel2l),
+                                 set_hbox(self.ignore_crop_l),
                                  set_hbox(self.crop_msg),
                                  set_hbox(self.crop_xi, self.getcropxi_l, self.crop_xf, self.getcropxf_l),
                                  set_hbox(self.crop_yi, self.getcropyi_l, self.crop_yf, self.getcropyf_l),
@@ -52,11 +53,6 @@ class SettingsWindow(QtWidgets.QWidget):
 
     def get_pixels(self):
         info = self.get_info_pixels()
-        print("\n\n")
-        print(str(info[-2]))
-        print(str(info[-1]))
-        print("\n\n")
-
         return int(info[-2]), int(info[-1])
 
     def get_info_pixels(self):
@@ -80,10 +76,10 @@ class SettingsWindow(QtWidgets.QWidget):
     def setting_values(self):
         info = self.get_values()
         self.set_values(info[0], info[1], info[2], info[3], info[4], info[5], info[6], info[7], info[8], info[9],\
-                        info[10], info[11], info[12])
+                        info[10], info[11], info[12], info[13])
 
     def set_values(self, temperature_camera, prefixo, exposicao, binning, tempo_entre_fotos, time_colling, get_level1,\
-                   get_level2, dark_photo, crop_xi, crop_xf, crop_yi, crop_yf):
+                   get_level2, dark_photo, crop_xi, crop_xf, crop_yi, crop_yf, ignore_crop):
         self.setField_temperature.setText(temperature_camera)
         self.prel.setText(prefixo)
         self.expl.setText(exposicao)
@@ -92,10 +88,12 @@ class SettingsWindow(QtWidgets.QWidget):
             b = int(binning)
         except:
             b = 0
+
         try:
             open_or_close = int(dark_photo)
         except:
             open_or_close = 0
+
         self.tempo_fotos.setText(tempo_entre_fotos)
         self.time_colling.setText(time_colling)
         self.combo.setCurrentIndex(b)
@@ -108,6 +106,8 @@ class SettingsWindow(QtWidgets.QWidget):
         self.getcropxf_l.setText(crop_xf)
         self.getcropyi_l.setText(crop_yi)
         self.getcropyf_l.setText(crop_yf)
+
+        self.ignore_crop_l.setChecked(ignore_crop)
 
     def create_cam_widgets(self):
         self.setField_temperature_label = QtWidgets.QLabel("Temperature(°C):", self)
@@ -132,12 +132,14 @@ class SettingsWindow(QtWidgets.QWidget):
         self.getlevel2 = QtWidgets.QLabel("top level:", self)
         self.getlevel2l = QtWidgets.QLineEdit(self)
 
+        self.ignore_crop_l = QtWidgets.QCheckBox('Ignore Crop Image', self)
+
         self.crop_msg = QtWidgets.QLabel("Crop image", self)
-        self.crop_xi = QtWidgets.QLabel("X AXIS: xi:", self)
+        self.crop_xi = QtWidgets.QLabel("W AXIS: xi:", self)
         self.getcropxi_l = QtWidgets.QLineEdit(self)
         self.crop_xf = QtWidgets.QLabel("xf:", self)
         self.getcropxf_l = QtWidgets.QLineEdit(self)
-        self.crop_yi = QtWidgets.QLabel("Y AXIS: yi:", self)
+        self.crop_yi = QtWidgets.QLabel("H AXIS: yi:", self)
         self.getcropyi_l = QtWidgets.QLineEdit(self)
         self.crop_yf = QtWidgets.QLabel("yf:", self)
         self.getcropyf_l = QtWidgets.QLineEdit(self)
@@ -171,12 +173,6 @@ class SettingsWindow(QtWidgets.QWidget):
             y_pixels, x_pixels = self.get_pixels()
 
             # Saving the Settings
-            print("\n\n")
-            print(int(self.combo.currentIndex()))
-            print(x_pixels/(int(self.combo.currentIndex() + 1)))
-            print(y_pixels/(int(self.combo.currentIndex() + 1)))
-            print("\n\n")
-
             if int(self.getcropxi_l.text()) > int(self.getcropxf_l.text()) or\
                             int(self.getcropyi_l.text()) > int(self.getcropyf_l.text()) or\
                             int(self.getcropxf_l.text()) >= x_pixels/(int(self.combo.currentIndex() + 1)) or \
@@ -187,7 +183,8 @@ class SettingsWindow(QtWidgets.QWidget):
                                          self.combo.currentIndex(), self.tempo_fotos.text(), self.time_colling.text(),
                                          self.getlevel1l.text(), self.getlevel2l.text(), self.close_open.currentIndex(),
                                          self.getcropxi_l.text(), self.getcropxf_l.text(),
-                                         self.getcropyi_l.text(), self.getcropyf_l.text())
+                                         self.getcropyi_l.text(), self.getcropyf_l.text(),
+                                         self.ignore_crop_l.isChecked())
                 self.cam.save_settings()
                 self.console.raise_text("Camera settings successfully saved!", 1)
         except Exception as e:
