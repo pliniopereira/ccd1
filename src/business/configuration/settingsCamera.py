@@ -60,7 +60,7 @@ class SettingsCamera:
                self._settings.value(c.GET_LEVEL1), self._settings.value(c.GET_LEVEL2), self._settings.value(c.DARK_PHOTO),\
                self._settings.value(c.CROP_X_AXIS_XI), self._settings.value(c.CROP_X_AXIS_XF),\
                self._settings.value(c.CROP_Y_AXIS_YI), self._settings.value(c.CROP_Y_AXIS_YF),\
-               cb(self._settings.value(c.CHEBOX_IGNORE_CROP))
+               self._settings.value(c.CHEBOX_IGNORE_CROP, True, type=bool)
 
     def get_filepath(self):
         return self._settings.value(c.FILENAME)
