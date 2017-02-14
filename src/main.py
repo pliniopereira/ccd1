@@ -1,11 +1,10 @@
 import os
 import sys
+sys.path.append(os.path.dirname(os.getcwd()))
 
 from PyQt5 import QtWidgets
 
 from src.ui.mainWindow.main import Main
-
-sys.path.append(os.path.dirname(os.getcwd()))
 
 
 # sudo -u hiyoku python main.py
