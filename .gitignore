@@ -35,3 +35,4 @@
 # Rope project settings
 .idea/
 /src/system
+*.pyc
