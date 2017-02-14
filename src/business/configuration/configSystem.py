@@ -2,7 +2,6 @@ from PyQt5 import QtCore
 
 from src.business.configuration.constants import system as s
 from src.business.consoleThreadOutput import ConsoleThreadOutput
-from src.ui.commons.verification import cb
 
 
 class ConfigSystem:
@@ -24,7 +23,7 @@ class ConfigSystem:
         self._settings.setValue(s.IMAGES_PATH, image_path)
 
     def get_site_settings(self):
-        return cb(self._settings.value(s.STARTUP)), self._settings.value(s.LOG_PATH),\
+        return self._settings.value(s.STARTUP, True, type=bool), self._settings.value(s.LOG_PATH),\
                self._settings.value(s.IMAGES_PATH)
 
     def get_image_path(self):

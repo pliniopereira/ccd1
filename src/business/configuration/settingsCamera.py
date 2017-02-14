@@ -1,7 +1,6 @@
 from PyQt5 import QtCore
 
 from src.business.configuration.constants import camera as c
-from src.ui.commons.verification import cb
 
 
 class SettingsCamera:
