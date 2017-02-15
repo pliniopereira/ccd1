@@ -34,9 +34,9 @@ class SettingsWindow(QtWidgets.QWidget):
                                  set_hbox(self.pre, self.prel),
                                  set_hbox(self.exp, self.expl),
                                  set_hbox(self.binning, self.combo),
+                                 set_hbox(self.dark, self.close_open),
                                  set_hbox(self.tempo_fotos_label, self.tempo_fotos),
                                  set_hbox(self.time_colling_label, self.time_colling),
-                                 set_hbox(self.dark, self.close_open),
                                  set_hbox(self.contrast_msg),
                                  set_hbox(self.getlevel1, self.getlevel1l, self.getlevel2, self.getlevel2l),
                                  set_hbox(self.ignore_crop_l),
@@ -110,38 +110,44 @@ class SettingsWindow(QtWidgets.QWidget):
         self.ignore_crop_l.setChecked(ignore_crop)
 
     def create_cam_widgets(self):
-        self.setField_temperature_label = QtWidgets.QLabel("Temperature(°C):", self)
-        self.pre = QtWidgets.QLabel("Filter name:", self)
+        self.setField_temperature_label = QtWidgets.QLabel("CCD Temperature(°C):", self)
+        self.pre = QtWidgets.QLabel("Filter Name:", self)
         self.prel = QtWidgets.QLineEdit(self)
 
-        self.exp = QtWidgets.QLabel("Exposure time(s):", self)
+        self.exp = QtWidgets.QLabel("Exposure time (s):", self)
         self.expl = QtWidgets.QLineEdit(self)
 
         self.binning = QtWidgets.QLabel("Binning:", self)
         self.combo = QtWidgets.QComboBox(self)
         self.fill_combo()
 
-        self.dark = QtWidgets.QLabel("Shooter:", self)
+        self.dark = QtWidgets.QLabel("Shutter:", self)
         self.close_open = QtWidgets.QComboBox(self)
         self.fill_combo_close_open()
 
-        self.contrast_msg = QtWidgets.QLabel("Image contrast:", self)
-        self.getlevel1 = QtWidgets.QLabel("bottom level:", self)
+        self.tempo_fotos_label = QtWidgets.QLabel("Time Between Images: (s):", self)
+        self.tempo_fotos = QtWidgets.QLineEdit(self)
+
+        self.time_colling_label = QtWidgets.QLabel("CCD Cooling Time:", self)
+        self.time_colling = QtWidgets.QLineEdit(self)
+
+        self.contrast_msg = QtWidgets.QLabel("Image Contrast:", self)
+        self.getlevel1 = QtWidgets.QLabel("Bottom Level:", self)
         self.getlevel1l = QtWidgets.QLineEdit(self)
 
-        self.getlevel2 = QtWidgets.QLabel("top level:", self)
+        self.getlevel2 = QtWidgets.QLabel("Top Level:", self)
         self.getlevel2l = QtWidgets.QLineEdit(self)
 
         self.ignore_crop_l = QtWidgets.QCheckBox('Ignore Crop Image', self)
 
-        self.crop_msg = QtWidgets.QLabel("Crop image", self)
-        self.crop_xi = QtWidgets.QLabel("W AXIS: xi:", self)
+        self.crop_msg = QtWidgets.QLabel("Crop Image", self)
+        self.crop_xi = QtWidgets.QLabel("Width: Wi:", self)
         self.getcropxi_l = QtWidgets.QLineEdit(self)
-        self.crop_xf = QtWidgets.QLabel("xf:", self)
+        self.crop_xf = QtWidgets.QLabel("Wf:", self)
         self.getcropxf_l = QtWidgets.QLineEdit(self)
-        self.crop_yi = QtWidgets.QLabel("H AXIS: yi:", self)
+        self.crop_yi = QtWidgets.QLabel("Height: Hi:", self)
         self.getcropyi_l = QtWidgets.QLineEdit(self)
-        self.crop_yf = QtWidgets.QLabel("yf:", self)
+        self.crop_yf = QtWidgets.QLabel("Hf:", self)
         self.getcropyf_l = QtWidgets.QLineEdit(self)
 
         self.button_clear = QtWidgets.QPushButton('Clear', self)
@@ -161,12 +167,6 @@ class SettingsWindow(QtWidgets.QWidget):
 
         self.buttoncancel = QtWidgets.QPushButton("Cancel", self)
         self.buttoncancel.clicked.connect(self.func_cancel)
-
-        self.tempo_fotos_label = QtWidgets.QLabel("Time between photo(s):", self)
-        self.tempo_fotos = QtWidgets.QLineEdit(self)
-
-        self.time_colling_label = QtWidgets.QLabel("CCD Cooling Time:", self)
-        self.time_colling = QtWidgets.QLineEdit(self)
 
     def button_ok_func(self):
         try:
