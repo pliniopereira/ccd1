@@ -125,10 +125,10 @@ class SettingsWindow(QtWidgets.QWidget):
         self.close_open = QtWidgets.QComboBox(self)
         self.fill_combo_close_open()
 
-        self.tempo_fotos_label = QtWidgets.QLabel("Time Between Images: (s):", self)
+        self.tempo_fotos_label = QtWidgets.QLabel("Time Between Images (s):", self)
         self.tempo_fotos = QtWidgets.QLineEdit(self)
 
-        self.time_colling_label = QtWidgets.QLabel("CCD Cooling Time:", self)
+        self.time_colling_label = QtWidgets.QLabel("CCD Cooling Time (s):", self)
         self.time_colling = QtWidgets.QLineEdit(self)
 
         self.contrast_msg = QtWidgets.QLabel("Image Contrast:", self)
