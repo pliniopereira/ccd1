@@ -221,6 +221,7 @@ class Camera(metaclass=Singleton):
 
         try:
             self.continuousShooterThread.one_photo = True
+            self.continuousShooterThread.wait_temperature = True
             self.continuousShooterThread.start_continuous_shooter()
             self.continuousShooterThread.start()
         except Exception as e:
