@@ -42,7 +42,7 @@ Manual do usuário do Manager CCD10.
 
 ![Conectar](https://raw.githubusercontent.com/pliniopereira/ccd10/master/doc/img/Menu_010.png)
 
->Conecta/desconecta o manager à câmera
+> Conecta/desconecta o manager à câmera
 
 ---
 
@@ -113,7 +113,7 @@ Manual do usuário do Manager CCD10.
 
 ![Camera Settings](https://raw.githubusercontent.com/pliniopereira/ccd10/master/doc/img/Camera%20Settings_018.png)
 
-###Configurações da camera:
+### Configurações da camera:
 > Temperature(°C): Define a temperatura que a camera deve atingir antes de inicar as observações.
 
 > Filter name: Define o nome do filtro que será utilizado.
