@@ -1,3 +1,4 @@
+from PyQt5 import QtCore
 from PyQt5 import QtWidgets
 
 from src.business.configuration.settingsCamera import SettingsCamera
@@ -22,7 +23,6 @@ class SettingsWindow(QtWidgets.QWidget):
         self.create_cam_widgets()
         self.p = parent
         self.fan = Fan(self.fanButton)
-        self.setField_temperature = QtWidgets.QLineEdit(self)
 
         self.lock = Locker()
 
@@ -111,44 +111,88 @@ class SettingsWindow(QtWidgets.QWidget):
 
     def create_cam_widgets(self):
         self.setField_temperature_label = QtWidgets.QLabel("CCD Temperature(°C):", self)
+        self.setField_temperature_label.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter)
+
+        self.setField_temperature = QtWidgets.QLineEdit(self)
+        self.setField_temperature.setMaximumWidth(100)
+
         self.pre = QtWidgets.QLabel("Filter Name:", self)
+        self.pre.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter)
+
         self.prel = QtWidgets.QLineEdit(self)
+        self.prel.setMaximumWidth(100)
 
         self.exp = QtWidgets.QLabel("Exposure time (s):", self)
+        self.exp.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter)
+
         self.expl = QtWidgets.QLineEdit(self)
+        self.expl.setMaximumWidth(100)
 
         self.binning = QtWidgets.QLabel("Binning:", self)
+        self.binning.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter)
+
         self.combo = QtWidgets.QComboBox(self)
+        self.combo.setMaximumWidth(100)
         self.fill_combo()
 
         self.dark = QtWidgets.QLabel("Shutter:", self)
+        self.dark.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter)
+
         self.close_open = QtWidgets.QComboBox(self)
+        self.close_open.setMaximumWidth(100)
         self.fill_combo_close_open()
 
         self.tempo_fotos_label = QtWidgets.QLabel("Time Between Images (s):", self)
+        self.tempo_fotos_label.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter)
+
         self.tempo_fotos = QtWidgets.QLineEdit(self)
+        self.tempo_fotos.setMaximumWidth(100)
 
         self.time_colling_label = QtWidgets.QLabel("CCD Cooling Time (s):", self)
+        self.time_colling_label.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter)
+
         self.time_colling = QtWidgets.QLineEdit(self)
+        self.time_colling.setMaximumWidth(100)
 
         self.contrast_msg = QtWidgets.QLabel("Image Contrast:", self)
         self.getlevel1 = QtWidgets.QLabel("Bottom Level:", self)
+        self.getlevel1.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter)
+
         self.getlevel1l = QtWidgets.QLineEdit(self)
+        self.getlevel1l.setMaximumWidth(50)
 
         self.getlevel2 = QtWidgets.QLabel("Top Level:", self)
+        self.getlevel2.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter)
+
         self.getlevel2l = QtWidgets.QLineEdit(self)
+        self.getlevel2l.setMaximumWidth(50)
 
         self.ignore_crop_l = QtWidgets.QCheckBox('Ignore Crop Image', self)
 
         self.crop_msg = QtWidgets.QLabel("Crop Image", self)
         self.crop_xi = QtWidgets.QLabel("Width: Wi:", self)
+        self.crop_xi.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter)
+
         self.getcropxi_l = QtWidgets.QLineEdit(self)
+        self.getcropxi_l.setMaximumWidth(50)
+
         self.crop_xf = QtWidgets.QLabel("Wf:", self)
+        self.crop_xf.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter)
+
         self.getcropxf_l = QtWidgets.QLineEdit(self)
+        self.getcropxf_l.setMaximumWidth(50)
+
         self.crop_yi = QtWidgets.QLabel("Height: Hi:", self)
+        self.crop_yi.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter)
+
         self.getcropyi_l = QtWidgets.QLineEdit(self)
+        self.getcropyi_l.setMaximumWidth(50)
+
         self.crop_yf = QtWidgets.QLabel("Hf:", self)
+        self.crop_yf.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter)
+
         self.getcropyf_l = QtWidgets.QLineEdit(self)
+        self.getcropyf_l.setMaximumWidth(50)
 
         self.button_clear = QtWidgets.QPushButton('Clear', self)
         self.button_clear.clicked.connect(self.clear_all)

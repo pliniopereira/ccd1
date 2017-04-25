@@ -400,8 +400,9 @@ def ccdinfo():
 def set_header(filename):
     '''
     :param filename: arquivo fit
-    :return: arquivo fit renomeado com data e horario
+    :return: 
     '''
+
     # Abrindo o arquivo
     fits_file = fits.open(filename)
     # Escrevendo o Header
@@ -420,7 +421,19 @@ def set_header(filename):
         print("Exception ->" + str(e))
 
 
-def set_png(filename, newname, get_level1, get_level2):
+def save_tif(img, newname):
+    print("Opening filename")
+    try:
+        print("tricat of save_tif")
+        imgarray = numpy.asarray(img, dtype=numpy.int16)
+        im3 = Image.fromarray(imgarray)
+        im3.save(newname)
+
+    except Exception as e:
+        print("Exception -> {}".format(e))
+
+
+def save_png(filename, newname, get_level1, get_level2):
     '''
     :param filename: nome do arquivo fit criado
     :param newname: nome do arquivo png criado a partir do fit
@@ -431,18 +444,18 @@ def set_png(filename, newname, get_level1, get_level2):
     Nome do observatorio, nome do filtro, data e horario.
     '''
     print("Opening filename")
-    fits_file = fits.open(filename)
+    img = filename
     try:
-        print("tricat of set_png")
-        img = toimage(fits_file[0].data)
-
+        print("tricat of save_png")
         im2 = img
 
         variavel = get_level(im2, get_level1, get_level2)
 
-        im2 = bytscl(fits_file[0].data, variavel[1], variavel[0])
-        img.save(newname)
+        im2 = bytscl(im2, variavel[1], variavel[0])
+        #img.save(newname)
 
+        im3 = Image.fromarray(im2)
+        im3.save(newname)
         im3 = toimage(im2)
         im3.save(newname)
 
@@ -451,8 +464,6 @@ def set_png(filename, newname, get_level1, get_level2):
 
     except Exception as e:
         print("Exception -> {}".format(e))
-    finally:
-        fits_file.close()
 
 
 def retorna_imagem(name_png):
@@ -799,20 +810,24 @@ def photoshoot(etime, pre, binning, dark_photo, get_level1, get_level2,
     if dark_photo == 1:
         fn = pre + "-DARK" + "_" + site_id_name + "_" + tempo
         name = path + fn
-        fitsname = name + '.fit'
+        fitname = name + '.fit'
+        fitname_final = name + '.fit'
         pngname = name + '.png'
-        fitsname_final = fn + '.fit'
         pngname_final = fn + '.png'
+        tifname = name + '.tif'
+        tifname_final = fn + '.tif'
     else:
         fn = pre + "_" + site_id_name + "_" + tempo
         name = path + fn
-        fitsname = name + '.fit'
+        fitname = name + '.fit'
+        fitname_final = name + '.fit'
         pngname = name + '.png'
-        fitsname_final = fn + '.fit'
         pngname_final = fn + '.png'
+        tifname = name + '.tif'
+        tifname_final = fn + '.tif'
 
     try:
-        os.unlink(fitsname)
+        os.unlink(tifname)
     except OSError:
         pass
     '''
@@ -830,7 +845,7 @@ def photoshoot(etime, pre, binning, dark_photo, get_level1, get_level2,
     except Exception as e:
         print("Not possible cropping image ->" + str(e))
 
-    fits.writeto(fitsname, img)
+    #fits.writeto(fitsname, img)
 
     print("\nGRAB IMAGE - End Readout\n")
 
@@ -846,13 +861,23 @@ def photoshoot(etime, pre, binning, dark_photo, get_level1, get_level2,
     # cmd(SbigLib.PAR_COMMAND.CC_CLOSE_DRIVER.value, None, None)
 
     print("Call set_header")
-    set_header(fitsname)
+    set_header(fitname)
+
+    print("\n\n")
+    print(img.dtype)
+    print("\n\n")
+
+    img_to_tif = img
+    img_to_png = img
+
+    print("Call set_tif")
+    save_tif(img_to_tif, tifname)
     print("Call set_png")
-    set_png(fitsname, pngname, get_level1, get_level2)
+    save_png(img_to_png, pngname, get_level1, get_level2)
 
     data, hora = get_date_hour(tempo)
     print("End of process")
-    return path, pngname_final, fitsname_final, data, hora
+    return path, pngname_final, fitname_final, tifname_final, data, hora
 
 
 def date_to_jd(year, month, day):

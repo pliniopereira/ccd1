@@ -8,18 +8,22 @@ class WidgetsPath(QtWidgets.QWidget):
         super(WidgetsPath, self).__init__(parent)
 
         self.cStart = QtWidgets.QCheckBox('Automatic Mode Start', self)
-
-        self.lLog = QtWidgets.QLabel('Log Path:', self)
+        self.lLog = QtWidgets.QLabel('Log Path:      ', self)
         self.eLog = QtWidgets.QLineEdit(self)
+        self.eLog.setMinimumWidth(250)
+
         self.pbutton = QtWidgets.QPushButton("Select Folder", self)
 
-
-        '''self.lProjPath = QtWidgets.QLabel('Project Path:')
+        '''
+        self.lProjPath = QtWidgets.QLabel('Project Path:')
         self.eProjPath = QtWidgets.QLineEdit(self)
-        self.pbutton = QtWidgets.QPushButton("Open File", self)'''
+        self.pbutton = QtWidgets.QPushButton("Open File", self)
+        '''
 
         self.lImagesPath = QtWidgets.QLabel('Images Path:')
         self.eImagesPath = QtWidgets.QLineEdit(self)
+        self.eImagesPath.setMinimumWidth(250)
+
         self.ibutton = QtWidgets.QPushButton('Select Folder', self)
 
         self.filename = ""

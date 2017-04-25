@@ -1,3 +1,4 @@
+from PyQt5 import QtCore
 from PyQt5 import QtWidgets
 
 from src.ui.commons.layout import set_hbox, set_lvbox
@@ -9,20 +10,34 @@ class WidgetsSun(QtWidgets.QWidget):
 
         # Creating Labels
         self.lmse = QtWidgets.QLabel("Max Solar Elevation (º):", self)
+        self.lmse.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter)
+
         self.lmle = QtWidgets.QLabel("Max Lunar Elevation (º):", self)
+        self.lmle.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter)
+
         self.lmlp = QtWidgets.QLabel("Max Lunar Phase (%):", self)
+        self.lmlp.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter)
+
 
         # Creating Input Line
         self.emse = QtWidgets.QLineEdit(self)
-        self.eilp = QtWidgets.QCheckBox('Ignore Lunar Position', self)
+        self.emse.setMaximumWidth(100)
+
+        self.ignore_lunar_position_label = QtWidgets.QLabel("    Ignore Lunar Position:", self)
+        self.ignore_lunar_position_label.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter)
+        self.eilp = QtWidgets.QCheckBox()
+
         self.emle = QtWidgets.QLineEdit(self)
+        self.emle.setMaximumWidth(100)
+
         self.emlp = QtWidgets.QLineEdit(self)
+        self.emlp.setMaximumWidth(100)
 
         self.setting_up()
 
     def setting_up(self):
         vbox = set_lvbox(set_hbox(self.lmse, self.emse),
-                         set_hbox(self.eilp),
+                         set_hbox(self.ignore_lunar_position_label, self.eilp),
                          set_hbox(self.lmle, self.emle),
                          set_hbox(self.lmlp, self.emlp))
 
