@@ -92,3 +92,5 @@ ENV/
 
 # Project ini
 /src/system
+/src/config
+/src/camera
