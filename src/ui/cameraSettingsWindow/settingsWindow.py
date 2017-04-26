@@ -1,5 +1,6 @@
 from PyQt5 import QtCore
 from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import (QRadioButton)
 
 from src.business.configuration.settingsCamera import SettingsCamera
 from src.business.consoleThreadOutput import ConsoleThreadOutput
@@ -43,6 +44,8 @@ class SettingsWindow(QtWidgets.QWidget):
                                  set_hbox(self.crop_msg),
                                  set_hbox(self.crop_xi, self.getcropxi_l, self.crop_xf, self.getcropxf_l),
                                  set_hbox(self.crop_yi, self.getcropyi_l, self.crop_yf, self.getcropyf_l),
+                                 set_hbox(self.image_tif),
+                                 set_hbox(self.image_fit),
                                  set_hbox(self.btn_one_photo, self.tempButton, self.fanButton, stretch2=1),
                                  set_hbox(self.buttonok, self.button_clear, self.buttoncancel, stretch2=1)))
 
@@ -193,6 +196,10 @@ class SettingsWindow(QtWidgets.QWidget):
 
         self.getcropyf_l = QtWidgets.QLineEdit(self)
         self.getcropyf_l.setMaximumWidth(50)
+
+        self.image_tif = QRadioButton("2222222222222222")
+
+        self.image_fit = QRadioButton("22222222222222222")
 
         self.button_clear = QtWidgets.QPushButton('Clear', self)
         self.button_clear.clicked.connect(self.clear_all)
