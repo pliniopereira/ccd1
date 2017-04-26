@@ -15,6 +15,9 @@ CROP_X_AXIS_XF = "crop_xf"
 CROP_Y_AXIS_YI = "crop_yi"
 CROP_Y_AXIS_YF = "crop_yf"
 CHEBOX_IGNORE_CROP = "ignore_crop"
+CHEBOX_IMAGE_TIF = "image_tif"
+CHEBOX_IMAGE_FIT = "image_fit"
+
 
 
 

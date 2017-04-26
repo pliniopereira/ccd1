@@ -39,6 +39,8 @@ class SThread(QtCore.QThread):
         info[11] = axis_yi inicial
         info[12] = axis_yf final
         info[13] = ignore_crop
+        info[14] = image_tif
+        info[15] = image_fit
         '''
         settings = SettingsCamera()
         info = settings.get_camera_settings()
@@ -57,7 +59,9 @@ class SThread(QtCore.QThread):
                                               self.get_level1, self.get_level2,
                                               self.get_axis_xi, self.get_axis_xf,
                                               self.get_axis_yi, self.get_axis_yf,
-                                              self.get_ignore_crop)
+                                              self.get_ignore_crop,
+                                              self.get_image_tif,
+                                              self.get_image_fit)
             self.init_image()
         except Exception as e:
             print(e)
@@ -99,6 +103,10 @@ class SThread(QtCore.QThread):
 
             self.get_ignore_crop = info[13]
 
+            self.get_image_tif = info[14]
+            self.get_image_fit = info[15]
+
+
         except Exception as e:
             print(e)
             self.etime = 100
@@ -119,13 +127,17 @@ class SThread(QtCore.QThread):
 
             self.get_ignore_crop = True
 
+            self.get_image_tif = True
+            self.get_image_fit = True
+
     def run(self):
         self.set_etime_pre_binning()
         self.lock.set_acquire()
         try:
             self.info = SbigDriver.photoshoot(self.etime, self.pre, self.b, self.dark_photo, self.get_level1,
                                               self.get_level2, self.get_axis_xi, self.get_axis_xf, self.get_axis_yi,
-                                              self.get_axis_yf, self.get_ignore_crop)
+                                              self.get_axis_yf, self.get_ignore_crop,
+                                              self.get_image_tif, self.get_image_fit)
             self.init_image()
         except Exception as e:
             print(e)

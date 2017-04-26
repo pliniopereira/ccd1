@@ -1,23 +1,21 @@
 import ctypes
-import math
 import os
 import sys
 import time
 from ctypes import c_ushort, POINTER, byref
 from datetime import datetime
 
-import numpy
 import numpy as np
 import pyfits as fits
-from PIL import Image, ImageDraw, ImageFont
-from scipy.misc import toimage
 
+from src.utils.camera import Image_Processing
 from src.utils.camera import SbigLib
 from src.utils.camera import SbigStructures
+from src.utils.camera.Julian_Day import jd_to_date, date_to_jd
 
-"""
+'''
 Faz a comunicação do software com a camera sbig, os comandos vem da classe camera.main.
-"""
+'''
 
 # Load Driver (DLL)
 try:
@@ -397,120 +395,6 @@ def ccdinfo():
     return cout.firmwareVersion, cout.cameraType, cout.name, readout_mode[1],  readout_mode[2]
 
 
-def set_header(filename):
-    '''
-    :param filename: arquivo fit
-    :return: 
-    '''
-
-    # Abrindo o arquivo
-    fits_file = fits.open(filename)
-    # Escrevendo o Header
-    # Can't get the temperature because have a locker locking shooter process
-    # fits_file[0].header["TEMP"] = tuple(get_temperature())[3]
-    fits_file[0].header["DATE"] = datetime.utcnow().strftime('%Y-%m-%d_%H:%M:%S')
-
-    # Criando o arquivo final
-    try:
-        print("Tricat of set_header")
-        # Fechando e removendo o arquivo temporario
-        # fits_file.flush()
-        fits_file.close()
-    except OSError as e:
-        print(filename)
-        print("Exception ->" + str(e))
-
-
-def save_tif(img, newname):
-    print("Opening filename")
-    try:
-        print("tricat of save_tif")
-        imgarray = numpy.asarray(img, dtype=numpy.int16)
-        im3 = Image.fromarray(imgarray)
-        im3.save(newname)
-
-    except Exception as e:
-        print("Exception -> {}".format(e))
-
-
-def save_png(filename, newname, get_level1, get_level2):
-    '''
-    :param filename: nome do arquivo fit criado
-    :param newname: nome do arquivo png criado a partir do fit
-    :param get_level1: Image contrast: bottom level
-    :param get_level2: Image contrast: top level
-    :return: arquivo fit e png. Arquivo .png redimensionado para 512X512, com a lib PIL se desenha na imagem os \
-    seguintes:
-    Nome do observatorio, nome do filtro, data e horario.
-    '''
-    print("Opening filename")
-    img = filename
-    try:
-        print("tricat of save_png")
-        im2 = img
-
-        variavel = get_level(im2, get_level1, get_level2)
-
-        im2 = bytscl(im2, variavel[1], variavel[0])
-        #img.save(newname)
-
-        im3 = Image.fromarray(im2)
-        im3.save(newname)
-        im3 = toimage(im2)
-        im3.save(newname)
-
-        resize_image_512x512(newname)
-        draw_image(newname)
-
-    except Exception as e:
-        print("Exception -> {}".format(e))
-
-
-def retorna_imagem(name_png):
-    """
-    :param name_png: recebe imagem png
-    :return:
-    """
-    img = Image.open(name_png)
-    img.show()
-
-
-def resize_image_512x512(name_png):
-    '''
-    :param name_png: recebe imagem png
-    :return: modifica tamanho para 512x512
-    '''
-    img = Image.open(name_png)
-    resized_img = img.resize((int(512), int(512)))
-    #resized_img = ImageOps.autocontrast(resized_img, 2)
-    resized_img.save(name_png)
-
-
-def draw_image(name_png):
-    '''
-    :param name_png: recebe imagem png
-    :return: escreve valores na imagem e salva
-    '''
-    hora_img, data_img = get_date_hour_image(name_png)
-    filter_img, observatory_img = get_filter_observatory(name_png)
-
-    img = Image.open(name_png)
-
-    fontsFolder = '/usr/share/fonts/truetype'
-    times_nr_Font = ImageFont.truetype(os.path.join(fontsFolder, 'Times_New_Roman_Bold.ttf'), 16)
-
-    draw = ImageDraw.Draw(img)
-    draw.text((10, 10), observatory_img, fill='white', font=times_nr_Font)
-    draw.text((470, 10), filter_img, fill='white', font=times_nr_Font)
-    draw.text((420, 490), hora_img, fill='white', font=times_nr_Font)
-    draw.text((10, 490), data_img, fill='white', font=times_nr_Font)
-    del draw
-
-    img.save(name_png)
-    #mostra imagem unicamente
-    #img.show()
-
-
 def set_path(pre):
     '''
     :param pre:
@@ -527,7 +411,7 @@ def set_path(pre):
     from src.business.configuration.configProject import ConfigProject
     ci = ConfigProject()
     name_observatory = str(ci.get_site_settings())
-    name_observatory = get_observatory(name_observatory)
+    name_observatory = Image_Processing.get_observatory(name_observatory)
 
     if int(tempo[9:11]) > 12:
         path = path + name_observatory + "_" + data + "/"
@@ -548,28 +432,6 @@ def set_path(pre):
     return path, tempo
 
 
-def get_date_hour(tempo):
-    data = tempo[0:4] + "_" + tempo[4:6] + tempo[6:8]
-    hora = tempo[9:11] + ":" + tempo[11:13] + ":" + tempo[13:15]
-
-    return data, hora
-
-
-def get_date_hour_image(tempo):
-    hora_img = tempo[-10:-8] + ":" + tempo[-8:-6] + ":" + tempo[-6:-4] + " UT"
-    data_img = tempo[-13:-11] + "/" + tempo[-15:-13] + "/" + tempo[-19:-15]
-
-    return hora_img, data_img
-
-
-def get_filter_observatory(name):
-    name_aux = name.split('/')[-1]
-    name_filter = name_aux.split('_')[0]
-    name_observatory = name_aux.split('_')[1]
-
-    return name_filter, name_observatory
-
-
 def get_observatory(name):
     name_aux = str(name).split(',')[1]
     name_aux = name_aux.replace("\'", "")
@@ -578,69 +440,9 @@ def get_observatory(name):
     return name_aux
 
 
-def bytscl(array, max = None, min = None, nan = 0, top=255):
-    # see http://star.pst.qub.ac.uk/idl/BYTSCL.html
-    # note that IDL uses slightly different formulae for bytscaling floats and ints.
-    # here we apply only the FLOAT formula...
-
-    if max is None: max = numpy.nanmax(array)
-    if min is None: min = numpy.nanmin(array)
-
-    # return (top+0.9999)*(array-min)/(max-min)
-    return numpy.maximum(numpy.minimum(
-        ((top + 0.9999) * (array - min) / (max - min)).astype(numpy.int16)
-        , top), 0)
-
-
-def get_level(im2, sref_min, sref_max):
-    '''
-    :param im2: imagem tipo float
-    :param sref_min: nivel de referencia normalizado
-    :param sref_max: nivel de referencia normalizado
-    :return: limites inferior e superior da imagem para exibição na tela, baseado nos niveis de referencia.
-    '''
-    #
-    x_min, x_max = numpy.min(im2), numpy.max(im2)
-
-    # bin_size precisa ser 1 para analisar ponto à ponto
-    bin_size = 1
-    x_min = 0.0
-
-    nbins = numpy.floor(((x_max - x_min) / bin_size))
-
-    try:
-        hist, bins = numpy.histogram(im2, int(nbins), range=[x_min, x_max])
-
-        sum_histogram = numpy.sum(hist)
-
-        sref = numpy.zeros(2)
-        sref[0] = sref_min
-        sref[1] = sref_max
-
-        res_sa = numpy.zeros(len(hist))
-
-        sa = 0.
-        for i in range(len(hist)):
-            sa += hist[i]
-            res_sa[i] = sa
-
-        res_sa2 = res_sa.tolist()
-        res = res_sa[numpy.where((res_sa > sum_histogram * sref[0]) & (res_sa < sum_histogram * sref[1]))]
-        nr = len(res)
-
-        sl0 = res_sa2.index(res[0])
-        sl1 = res_sa2.index(res[nr - 1])
-        slevel = [sl0, sl1]
-    except Exception as e:
-        print("Exception get_level ->" + str(e))
-        print("slevel = [10, 20]")
-        slevel = [10, 20]
-
-    return slevel
-
-
 def photoshoot(etime, pre, binning, dark_photo, get_level1, get_level2,
-               get_axis_xi, get_axis_xf, get_axis_yi, get_axis_yf, ignore_crop):
+               get_axis_xi, get_axis_xf, get_axis_yi, get_axis_yf, ignore_crop,
+               image_tif, image_fit):
     '''
     print("\n\n")
     print(etime)
@@ -805,26 +607,26 @@ def photoshoot(etime, pre, binning, dark_photo, get_level1, get_level2,
     ci = ConfigProject()
     site_id_name = str(ci.get_site_settings())
 
-    site_id_name = get_observatory(site_id_name)
+    site_id_name = Image_Processing.get_observatory(site_id_name)
 
     if dark_photo == 1:
         fn = pre + "-DARK" + "_" + site_id_name + "_" + tempo
         name = path + fn
-        fitname = name + '.fit'
-        fitname_final = name + '.fit'
         pngname = name + '.png'
         pngname_final = fn + '.png'
         tifname = name + '.tif'
         tifname_final = fn + '.tif'
+        fitname = name + '.fit'
+        fitname_final = fn + '.fit'
     else:
         fn = pre + "_" + site_id_name + "_" + tempo
         name = path + fn
-        fitname = name + '.fit'
-        fitname_final = name + '.fit'
         pngname = name + '.png'
         pngname_final = fn + '.png'
         tifname = name + '.tif'
         tifname_final = fn + '.tif'
+        fitname = name + '.fit'
+        fitname_final = fn + '.fit'
 
     try:
         os.unlink(tifname)
@@ -845,8 +647,6 @@ def photoshoot(etime, pre, binning, dark_photo, get_level1, get_level2,
     except Exception as e:
         print("Not possible cropping image ->" + str(e))
 
-    #fits.writeto(fitsname, img)
-
     print("\nGRAB IMAGE - End Readout\n")
 
     cin = SbigStructures.EndReadoutParams
@@ -860,93 +660,28 @@ def photoshoot(etime, pre, binning, dark_photo, get_level1, get_level2,
 
     # cmd(SbigLib.PAR_COMMAND.CC_CLOSE_DRIVER.value, None, None)
 
-    print("Call set_header")
-    set_header(fitname)
-
-    print("\n\n")
-    print(img.dtype)
-    print("\n\n")
-
     img_to_tif = img
     img_to_png = img
+    img_to_fit = img
 
-    print("Call set_tif")
-    save_tif(img_to_tif, tifname)
+    try:
+        if image_tif:
+            print("Call set_tif")
+            Image_Processing.save_tif(img_to_tif, tifname)
+    except Exception as e:
+        print("Image .tif ERROR -> {}".format(e))
+
+    try:
+        if image_fit:
+            fits.writeto(fitname, img_to_fit)
+            print("Call set_header")
+            Image_Processing.set_header(fitname)
+    except Exception as e:
+        print("Image .fit ERROR -> {}".format(e))
+
     print("Call set_png")
-    save_png(img_to_png, pngname, get_level1, get_level2)
+    Image_Processing.save_png(img_to_png, pngname, get_level1, get_level2)
 
-    data, hora = get_date_hour(tempo)
+    data, hora = Image_Processing.get_date_hour(tempo)
     print("End of process")
-    return path, pngname_final, fitname_final, tifname_final, data, hora
-
-
-def date_to_jd(year, month, day):
-    year = int(year)
-    month = int(month)
-    day = int(day)
-
-    if month == 1 or month == 2:
-        yearp = year - 1
-        monthp = month + 12
-    else:
-        yearp = year
-        monthp = month
-
-    # this checks where we are in relation to October 15, 1582, the beginning
-    # of the Gregorian calendar.
-    if ((year < 1582) or
-            (year == 1582 and month < 10) or
-            (year == 1582 and month == 10 and day < 15)):
-        # before start of Gregorian calendar
-        B = 0
-    else:
-        # after start of Gregorian calendar
-        A = math.trunc(yearp / 100.)
-        B = 2 - A + math.trunc(A / 4.)
-
-    if yearp < 0:
-        C = math.trunc((365.25 * yearp) - 0.75)
-    else:
-        C = math.trunc(365.25 * yearp)
-
-    D = math.trunc(30.6001 * (monthp + 1))
-
-    jd = B + C + D + day + 1720994.5
-
-    return jd
-
-
-def jd_to_date(jd):
-    jd += 0.5
-
-    F, I = math.modf(jd)
-    I = int(I)
-
-    A = math.trunc((I - 1867216.25) / 36524.25)
-
-    if I > 2299160:
-        B = I + 1 + A - math.trunc(A / 4.)
-    else:
-        B = I
-
-    C = B + 1524
-
-    D = math.trunc((C - 122.1) / 365.25)
-
-    E = math.trunc(365.25 * D)
-
-    G = math.trunc((C - E) / 30.6001)
-
-    day = C - E + F - math.trunc(30.6001 * G)
-
-    if G < 13.5:
-        month = G - 1
-    else:
-        month = G - 13
-
-    if month > 2.5:
-        year = D - 4716
-    else:
-        year = D - 4715
-
-    return year, month, int(day)
+    return path, pngname_final, tifname_final, fitname_final, data, hora

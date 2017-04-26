@@ -1,6 +1,5 @@
 from PyQt5 import QtCore
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import (QRadioButton)
 
 from src.business.configuration.settingsCamera import SettingsCamera
 from src.business.consoleThreadOutput import ConsoleThreadOutput
@@ -44,8 +43,8 @@ class SettingsWindow(QtWidgets.QWidget):
                                  set_hbox(self.crop_msg),
                                  set_hbox(self.crop_xi, self.getcropxi_l, self.crop_xf, self.getcropxf_l),
                                  set_hbox(self.crop_yi, self.getcropyi_l, self.crop_yf, self.getcropyf_l),
-                                 set_hbox(self.image_tif),
-                                 set_hbox(self.image_fit),
+                                 set_hbox(self.image_tif_l),
+                                 set_hbox(self.image_fit_l),
                                  set_hbox(self.btn_one_photo, self.tempButton, self.fanButton, stretch2=1),
                                  set_hbox(self.buttonok, self.button_clear, self.buttoncancel, stretch2=1)))
 
@@ -79,10 +78,10 @@ class SettingsWindow(QtWidgets.QWidget):
     def setting_values(self):
         info = self.get_values()
         self.set_values(info[0], info[1], info[2], info[3], info[4], info[5], info[6], info[7], info[8], info[9],\
-                        info[10], info[11], info[12], info[13])
+                        info[10], info[11], info[12], info[13], info[14], info[15])
 
     def set_values(self, temperature_camera, prefixo, exposicao, binning, tempo_entre_fotos, time_colling, get_level1,\
-                   get_level2, dark_photo, crop_xi, crop_xf, crop_yi, crop_yf, ignore_crop):
+                   get_level2, dark_photo, crop_xi, crop_xf, crop_yi, crop_yf, ignore_crop, image_tif, image_fit):
         self.setField_temperature.setText(temperature_camera)
         self.prel.setText(prefixo)
         self.expl.setText(exposicao)
@@ -111,6 +110,10 @@ class SettingsWindow(QtWidgets.QWidget):
         self.getcropyf_l.setText(crop_yf)
 
         self.ignore_crop_l.setChecked(ignore_crop)
+
+        self.image_tif_l.setChecked(image_tif)
+        self.image_fit_l.setChecked(image_fit)
+
 
     def create_cam_widgets(self):
         self.setField_temperature_label = QtWidgets.QLabel("CCD Temperature(°C):", self)
@@ -197,9 +200,9 @@ class SettingsWindow(QtWidgets.QWidget):
         self.getcropyf_l = QtWidgets.QLineEdit(self)
         self.getcropyf_l.setMaximumWidth(50)
 
-        self.image_tif = QRadioButton("2222222222222222")
+        self.image_tif_l = QtWidgets.QCheckBox('Image .tif', self)
 
-        self.image_fit = QRadioButton("22222222222222222")
+        self.image_fit_l = QtWidgets.QCheckBox('Image .fit', self)
 
         self.button_clear = QtWidgets.QPushButton('Clear', self)
         self.button_clear.clicked.connect(self.clear_all)
@@ -231,11 +234,13 @@ class SettingsWindow(QtWidgets.QWidget):
                 self.console.raise_text("Wrong values for image crop.", 3)
             else:
                 self.cam.set_camera_settings(self.setField_temperature.text(), self.prel.text(), self.expl.text(),
-                                         self.combo.currentIndex(), self.tempo_fotos.text(), self.time_colling.text(),
-                                         self.getlevel1l.text(), self.getlevel2l.text(), self.close_open.currentIndex(),
-                                         self.getcropxi_l.text(), self.getcropxf_l.text(),
-                                         self.getcropyi_l.text(), self.getcropyf_l.text(),
-                                         self.ignore_crop_l.isChecked())
+                                             self.combo.currentIndex(), self.tempo_fotos.text(), self.time_colling.text(),
+                                             self.getlevel1l.text(), self.getlevel2l.text(), self.close_open.currentIndex(),
+                                             self.getcropxi_l.text(), self.getcropxf_l.text(),
+                                             self.getcropyi_l.text(), self.getcropyf_l.text(),
+                                             self.ignore_crop_l.isChecked(),
+                                             self.image_tif_l.isChecked(),
+                                             self.image_fit_l.isChecked())
                 self.cam.save_settings()
                 self.console.raise_text("Camera settings successfully saved!", 1)
         except Exception as e:
