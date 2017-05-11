@@ -92,7 +92,7 @@ class Shooter(QtWidgets.QWidget):
     def set_image(self, img):
         print("Setting Pixmap")
         try:
-            path = img.path + img.png_name
+            path = img.path + img.name_image
             # image = Image.open(path)
 
             print(os.path.splitext(path)[1])

@@ -398,7 +398,7 @@ def ccdinfo():
 def set_path(pre):
     '''
     :param pre:
-    :return: gera nome da pasta e consequente do arquivo fit e png.
+    :return: gera nome da pasta e consequente do arquivo fit e tif.
     '''
     tempo = datetime.utcnow().strftime('%Y%m%d_%H%M%S')
 
@@ -612,19 +612,15 @@ def photoshoot(etime, pre, binning, dark_photo, get_level1, get_level2,
     if dark_photo == 1:
         fn = pre + "-DARK" + "_" + site_id_name + "_" + tempo
         name = path + fn
-        pngname = name + '.fit'
-        pngname_final = fn + '.fit'
-        tifname = name + '.fit'
-        tifname_final = fn + '.fit'
+        tifname = name + '.tif'
+        tifname_final = fn + '.tif'
         fitname = name + '.fit'
         fitname_final = fn + '.fit'
     else:
         fn = pre + "_" + site_id_name + "_" + tempo
         name = path + fn
-        pngname = name + '.fit'
-        pngname_final = fn + '.fit'
-        tifname = name + '.fit'
-        tifname_final = fn + '.fit'
+        tifname = name + '.tif'
+        tifname_final = fn + '.tif'
         fitname = name + '.fit'
         fitname_final = fn + '.fit'
 
@@ -661,13 +657,19 @@ def photoshoot(etime, pre, binning, dark_photo, get_level1, get_level2,
     # cmd(SbigLib.PAR_COMMAND.CC_CLOSE_DRIVER.value, None, None)
 
     img_to_tif = img
-    img_to_png = img
     img_to_fit = img
 
     try:
         if image_tif:
             print("Call set_tif")
             Image_Processing.save_tif(img_to_tif, tifname)
+            if dark_photo == 1:
+                fn = pre + "-DARK" + "_" + site_id_name + "_" + tempo
+                nameimage_final = fn + '.tif'
+            else:
+                fn = pre + "_" + site_id_name + "_" + tempo
+                nameimage_final = fn + '.tif'
+
     except Exception as e:
         print("Image .tif ERROR -> {}".format(e))
 
@@ -676,6 +678,13 @@ def photoshoot(etime, pre, binning, dark_photo, get_level1, get_level2,
             fits.writeto(fitname, img_to_fit)
             print("Call set_header")
             Image_Processing.set_header(fitname)
+            if dark_photo == 1:
+                fn = pre + "-DARK" + "_" + site_id_name + "_" + tempo
+                nameimage_final = fn + '.fit'
+            else:
+                fn = pre + "_" + site_id_name + "_" + tempo
+                nameimage_final = fn + '.fit'
+
     except Exception as e:
         print("Image .fit ERROR -> {}".format(e))
 
@@ -684,4 +693,4 @@ def photoshoot(etime, pre, binning, dark_photo, get_level1, get_level2,
 
     data, hora = Image_Processing.get_date_hour(tempo)
     print("End of process")
-    return path, pngname_final, tifname_final, fitname_final, data, hora
+    return path, nameimage_final, tifname_final, fitname_final, data, hora
