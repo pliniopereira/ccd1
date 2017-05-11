@@ -1,5 +1,5 @@
 import skimage.io
-from PIL import Image
+from PIL.ImageQt import ImageQt
 from PyQt5 import QtCore
 from PyQt5 import QtGui
 from PyQt5 import QtWidgets
@@ -113,12 +113,13 @@ class Shooter(QtWidgets.QWidget):
 
                 im5 = Image_Processing.draw_image(im4, file_name)
 
-                im5.show()
+                # im5.show()
             except Exception as e:
                 print("Exception image_processing... -> {}".format(e))
 
             try:
-                self.img.setPixmap(QtGui.QPixmap(im5))
+                qim = ImageQt(im5)
+                self.img.setPixmap(QtGui.QPixmap.fromImage(qim))
             except Exception as e:
                 print("Exception setPixmap(QtGui.QPixmap(image_to_show)) -> {}".format(e))
 
