@@ -53,15 +53,13 @@ def save_tif(img, newname):
 
 
 def save_png(img, newname, get_level1, get_level2):
-    '''
-    :param filename: nome do arquivo fit criado
-    :param newname: nome do arquivo png criado a partir do fit
-    :param get_level1: Image contrast: bottom level
-    :param get_level2: Image contrast: top level
-    :return: arquivo fit e png. Arquivo .png redimensionado para 512X512, com a lib PIL se desenha na imagem os \
-    seguintes:
-    Nome do observatorio, nome do filtro, data e horario.
-    '''
+    """
+    :param img: 
+    :param newname: 
+    :param get_level1: 
+    :param get_level2: 
+    :return: 
+    """
     print("Opening filename")
     try:
         print("tricat of save_png")
@@ -76,42 +74,41 @@ def save_png(img, newname, get_level1, get_level2):
         im3 = toimage(im2)
         im3.save(newname)
 
-        resize_image_512x512(newname)
-        draw_image(newname)
+        # resize_image_512x512(newname)
+        # draw_image(newname)
 
     except Exception as e:
         print("Exception -> {}".format(e))
 
 
-def retorna_imagem(name_png):
+def retorna_imagem(img):
+    """ 
+    :param name_png: 
+    :return: 
     """
-    :param name_png: recebe imagem png
-    :return:
-    """
-    img2 = Image.open(name_png)
+    img2 = Image.open(img)
     img2.show()
 
 
-def resize_image_512x512(name_png):
-    '''
-    :param name_png: recebe imagem png
-    :return: modifica tamanho para 512x512
-    '''
-    img = Image.open(name_png)
+def resize_image_512x512(img):
+    """
+    :param img: 
+    :return: 
+    """
     resized_img = img.resize((int(512), int(512)))
     #resized_img = ImageOps.autocontrast(resized_img, 2)
-    resized_img.save(name_png)
+
+    return resized_img
 
 
-def draw_image(name_png):
-    '''
-    :param name_png: recebe imagem png
-    :return: escreve valores na imagem e salva
-    '''
-    hora_img, data_img = get_date_hour_image(name_png)
-    filter_img, observatory_img = get_filter_observatory(name_png)
-
-    img = Image.open(name_png)
+def draw_image(img, file_name):
+    """
+    :param img: 
+    :param file_name: 
+    :return: 
+    """
+    hora_img, data_img = get_date_hour_image(file_name)
+    filter_img, observatory_img = get_filter_observatory(file_name)
 
     fontsFolder = '/usr/share/fonts/truetype'
     times_nr_Font = ImageFont.truetype(os.path.join(fontsFolder, 'Times_New_Roman_Bold.ttf'), 16)
@@ -123,7 +120,7 @@ def draw_image(name_png):
     draw.text((10, 490), data_img, fill='white', font=times_nr_Font)
     del draw
 
-    img.save(name_png)
+    return img
     #mostra imagem unicamente
     #img.show()
 

@@ -612,8 +612,8 @@ def photoshoot(etime, pre, binning, dark_photo, get_level1, get_level2,
     if dark_photo == 1:
         fn = pre + "-DARK" + "_" + site_id_name + "_" + tempo
         name = path + fn
-        pngname = name + '.png'
-        pngname_final = fn + '.png'
+        pngname = name + '.tif'
+        pngname_final = fn + '.tif'
         tifname = name + '.tif'
         tifname_final = fn + '.tif'
         fitname = name + '.fit'
@@ -621,8 +621,8 @@ def photoshoot(etime, pre, binning, dark_photo, get_level1, get_level2,
     else:
         fn = pre + "_" + site_id_name + "_" + tempo
         name = path + fn
-        pngname = name + '.png'
-        pngname_final = fn + '.png'
+        pngname = name + '.tif'
+        pngname_final = fn + '.tif'
         tifname = name + '.tif'
         tifname_final = fn + '.tif'
         fitname = name + '.fit'
@@ -679,8 +679,8 @@ def photoshoot(etime, pre, binning, dark_photo, get_level1, get_level2,
     except Exception as e:
         print("Image .fit ERROR -> {}".format(e))
 
-    print("Call set_png")
-    Image_Processing.save_png(img_to_png, pngname, get_level1, get_level2)
+    # print("Call set_png")
+    # Image_Processing.save_png(img_to_png, pngname, get_level1, get_level2)
 
     data, hora = Image_Processing.get_date_hour(tempo)
     print("End of process")

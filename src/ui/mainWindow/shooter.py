@@ -1,9 +1,13 @@
+import skimage.io
+from PIL import Image
 from PyQt5 import QtCore
 from PyQt5 import QtGui
 from PyQt5 import QtWidgets
+from scipy.misc import toimage
 
 from src.controller.camera import Camera
 from src.ui.commons.layout import set_hbox, set_lvbox
+from src.utils.camera import Image_Processing
 
 
 # Aux Functions
@@ -86,22 +90,74 @@ class Shooter(QtWidgets.QWidget):
         print("Setting Pixmap")
         try:
             path = img.path + img.png_name
-            self.img.setPixmap(QtGui.QPixmap(path))
+            # image = Image.open(path)
+
+            file_name = path
+
+            img = skimage.io.imread(path)
+
+            try:
+                image = img
+
+                get_level1 = 0.00
+
+                get_level2 = 0.99
+
+                variavel = Image_Processing.get_level(image, get_level1, get_level2)
+
+                im2 = Image_Processing.bytscl(image, variavel[1], variavel[0])
+
+                im3 = toimage(im2)
+
+                im4 = Image_Processing.resize_image_512x512(im3)
+
+                im5 = Image_Processing.draw_image(im4, file_name)
+
+                im5.show()
+            except Exception as e:
+                print("Exception image_processing... -> {}".format(e))
+
+            try:
+                self.img.setPixmap(QtGui.QPixmap(im5))
+            except Exception as e:
+                print("Exception setPixmap(QtGui.QPixmap(image_to_show)) -> {}".format(e))
+
             print(path)
             #self.fill_image_info(img.png_name, img.date, img.hour)
 
         except Exception as e:
-            print(e)
+            print("Exception Setting Pixmap -> {}".format(e))
 
     def fill_combo(self):
         self.combo.addItem("1x1", 0)
         self.combo.addItem("2x2", 1)
         self.combo.addItem("3x3", 2)
 
-    '''def fill_image_info(self, filename, time, hora):
-        self.prefix.setText(filename)
-        self.date.setText(time)
-        self.hour.setText(hora)'''
+    # def fill_image_info(self, filename, time, hora):
+    #     self.prefix.setText(filename)
+    #     self.date.setText(time)
+    #     self.hour.setText(hora)
 
     def clear_image_info(self):
         self.prefix.clear()
+
+    # def image_processing(self, image):
+    #     img = image
+    #
+    #     get_level1 = 0.00
+    #
+    #     get_level2 = 0.99
+    #
+    #     variavel = Image_Processing.get_level(img, get_level1, get_level2)
+    #
+    #     im2 = Image_Processing.bytscl(img, variavel[1], variavel[0])
+    #
+    #     im3 = toimage(im2)
+    #
+    #     im4 = Image_Processing.resize_image_512x512(im3)
+    #
+    #     im5 = Image_Processing.draw_image(im4)
+    #
+    #     im5.show()
+    #
+    #     return im5
