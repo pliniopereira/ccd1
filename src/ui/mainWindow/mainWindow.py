@@ -6,7 +6,7 @@ from src.ui.mainWindow.cameraInfo import CameraInfo
 from src.ui.mainWindow.clock import Clock
 from src.ui.mainWindow.configsInfo import ConfigsInfo
 from src.ui.mainWindow.consoleLogWidget import ConsoleLogWidget
-from src.ui.mainWindow.shooter import Shooter
+from src.ui.mainWindow.Shooter import Shooter
 
 
 class MainWindow(QtWidgets.QWidget):
