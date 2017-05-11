@@ -1,8 +1,11 @@
+import os
+
 import skimage.io
 from PIL.ImageQt import ImageQt
 from PyQt5 import QtCore
 from PyQt5 import QtGui
 from PyQt5 import QtWidgets
+from pyfits import getdata
 from scipy.misc import toimage
 
 from src.controller.camera import Camera
@@ -92,9 +95,13 @@ class Shooter(QtWidgets.QWidget):
             path = img.path + img.png_name
             # image = Image.open(path)
 
-            file_name = path
+            print(os.path.splitext(path)[1])
+            if os.path.splitext(path)[1] == '.fit':
+                img = getdata(path)
+            else:
+                img = skimage.io.imread(path)
 
-            img = skimage.io.imread(path)
+            file_name = path
 
             try:
                 image = img

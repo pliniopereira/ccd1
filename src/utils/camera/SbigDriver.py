@@ -612,19 +612,19 @@ def photoshoot(etime, pre, binning, dark_photo, get_level1, get_level2,
     if dark_photo == 1:
         fn = pre + "-DARK" + "_" + site_id_name + "_" + tempo
         name = path + fn
-        pngname = name + '.tif'
-        pngname_final = fn + '.tif'
-        tifname = name + '.tif'
-        tifname_final = fn + '.tif'
+        pngname = name + '.fit'
+        pngname_final = fn + '.fit'
+        tifname = name + '.fit'
+        tifname_final = fn + '.fit'
         fitname = name + '.fit'
         fitname_final = fn + '.fit'
     else:
         fn = pre + "_" + site_id_name + "_" + tempo
         name = path + fn
-        pngname = name + '.tif'
-        pngname_final = fn + '.tif'
-        tifname = name + '.tif'
-        tifname_final = fn + '.tif'
+        pngname = name + '.fit'
+        pngname_final = fn + '.fit'
+        tifname = name + '.fit'
+        tifname_final = fn + '.fit'
         fitname = name + '.fit'
         fitname_final = fn + '.fit'
 
