@@ -53,15 +53,6 @@ class Shooter(QtWidgets.QWidget):
         self.set_image(img)
 
     def set_layout(self):
-        # self.fill_combo()
-        #
-        # hbox = set_hbox(self.sbutton, self.tb,
-        # QLabel("Prefixo:", self), self.pre,
-        # QLabel("Binning:", self), self.combo,
-        # self.abutton,
-        # QLabel("Hora:", self), self.htext,
-        # QLabel("Min:", self), self.mtext)
-
         hb2 = set_hbox(self.prefix, self.date, self.hour)
 
         self.setLayout(set_lvbox(set_hbox(self.img), hb2))
@@ -90,12 +81,13 @@ class Shooter(QtWidgets.QWidget):
             print(e)
 
     def set_image(self, img):
+        """
+        :param img: recebe .tif ou .fit
+        """
         print("Setting Pixmap")
         try:
             path = img.path + img.name_image
-            # image = Image.open(path)
 
-            print(os.path.splitext(path)[1])
             if os.path.splitext(path)[1] == '.fit':
                 img = getdata(path)
             else:
@@ -120,7 +112,6 @@ class Shooter(QtWidgets.QWidget):
 
                 im5 = Image_Processing.draw_image(im4, file_name)
 
-                # im5.show()
             except Exception as e:
                 print("Exception image_processing... -> {}".format(e))
 
@@ -131,7 +122,6 @@ class Shooter(QtWidgets.QWidget):
                 print("Exception setPixmap(QtGui.QPixmap(image_to_show)) -> {}".format(e))
 
             print(path)
-            #self.fill_image_info(img.png_name, img.date, img.hour)
 
         except Exception as e:
             print("Exception Setting Pixmap -> {}".format(e))
@@ -141,31 +131,5 @@ class Shooter(QtWidgets.QWidget):
         self.combo.addItem("2x2", 1)
         self.combo.addItem("3x3", 2)
 
-    # def fill_image_info(self, filename, time, hora):
-    #     self.prefix.setText(filename)
-    #     self.date.setText(time)
-    #     self.hour.setText(hora)
-
     def clear_image_info(self):
         self.prefix.clear()
-
-    # def image_processing(self, image):
-    #     img = image
-    #
-    #     get_level1 = 0.00
-    #
-    #     get_level2 = 0.99
-    #
-    #     variavel = Image_Processing.get_level(img, get_level1, get_level2)
-    #
-    #     im2 = Image_Processing.bytscl(img, variavel[1], variavel[0])
-    #
-    #     im3 = toimage(im2)
-    #
-    #     im4 = Image_Processing.resize_image_512x512(im3)
-    #
-    #     im5 = Image_Processing.draw_image(im4)
-    #
-    #     im5.show()
-    #
-    #     return im5
