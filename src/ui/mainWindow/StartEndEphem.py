@@ -12,19 +12,19 @@ class StartEndEphem(QtWidgets.QFrame):
         super(StartEndEphem, self).__init__(parent)
         self.init_widgets()
         self.config_widgets()
-        self.info_start_end = None
 
     def init_widgets(self):
         self.title = QtWidgets.QLabel("Observation Time", self)
-        start_l = QtWidgets.QLabel("Start:", self)
-        self.info_start_end = result()
 
-        print(self.info_start_end)
-        start_field = QtWidgets.QLabel("2017-05-12 HH MM")
+        info_start_end = result()
+
+        start_l = QtWidgets.QLabel("Start:", self)
+        start_time = str(info_start_end[0])
+        start_field = QtWidgets.QLabel(start_time[:-10] + " UTC")
 
         end_l = QtWidgets.QLabel("End:", self)
-
-        end_field = QtWidgets.QLabel("2017-05-12 HH MM")
+        end_time = str(info_start_end[1])
+        end_field = QtWidgets.QLabel(end_time[:-10] + " UTC")
 
         self.setLayout(set_lvbox(set_hbox(self.title),
                                  set_hbox(start_l, start_field),

@@ -11,7 +11,7 @@ class TempMonitor(QtWidgets.QWidget):
         self.tempMonitor = QtWidgets.QLabel(self)
         self.Sched = SchedTemperature(self.tempMonitor)
 
-        self.label = QtWidgets.QLabel("Temperature:", self)
+        self.label = QtWidgets.QLabel("Temperature:                        ", self)
 
         self.setLayout(set_hbox(self.label, self.tempMonitor, stretch=1))
 
