@@ -15,7 +15,6 @@ class SchedSunMoonPositions(metaclass=Singleton):
 
         self.thread_sun_moon.start()
 
-
     def refresh_info(self, info):
         try:
             self.sunElevationField.setText(info[0])
