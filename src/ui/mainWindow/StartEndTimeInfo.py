@@ -42,7 +42,6 @@ def result():
 
                 if flag == 0:
                     start = now_datetime
-
                     flag = 1
 
             elif float(s_ag) < -12.0 and float(m_ag) < 5.0 and float(frac) > 0.2:
@@ -52,12 +51,10 @@ def result():
 
             elif (float(s_ag) > -12.0 or float(m_ag) > 10.0) and float(frac) < 0.2 and flag == 1:
                 end = now_datetime
-
                 break
 
             elif (float(s_ag) > -12.0 or float(m_ag) > 5.0) and float(frac) > 0.2 and flag == 1:
                 end = now_datetime
-
                 break
 
             now_datetime = datetime.datetime.utcnow().replace(hour=12).replace(minute=00).replace(second=0) \
