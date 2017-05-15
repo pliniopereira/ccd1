@@ -8,14 +8,21 @@ from src.business.configuration.configProject import ConfigProject
 
 
 def result():
-        info_lon_lat_elev = get_info()
+        config = ConfigProject()
+
+        info = config.get_geographic_settings()
+        infosun = config.get_moonsun_settings()
+
+        max_solar_elevation = infosun[0]  # -12
+        max_lunar_elevation = infosun[2]  # 8
+        max_lunar_phase = infosun[3]  # 1
 
         now_datetime = datetime.datetime.utcnow().replace(hour=12).replace(minute=00).replace(second=0)
         obs = ephem.Observer()
 
-        obs.lat = info_lon_lat_elev[0]
-        obs.lon = info_lon_lat_elev[1]
-        obs.elevation = float(info_lon_lat_elev[2])
+        obs.lat = info[0]
+        obs.lon = info[1]
+        obs.elevation = float(info[2])
         obs.date = ephem.date(now_datetime)
 
         sun = ephem.Sun()
@@ -70,15 +77,3 @@ def result():
         print(end)
 
         return start, end, obs_time
-
-
-def get_info():
-    config = ConfigProject()
-
-    info = config.get_geographic_settings()
-
-    latitude = info[0]
-    longitude = info[1]
-    elevation = info[2]
-
-    return latitude, longitude, elevation
