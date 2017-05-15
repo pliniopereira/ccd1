@@ -4,13 +4,17 @@ from datetime import timedelta
 
 import ephem
 
+from src.business.configuration.configProject import ConfigProject
+
 
 def result():
+        info_lon_lat_elev = get_info()
+
         now_datetime = datetime.datetime.utcnow().replace(hour=12).replace(minute=00).replace(second=0)
         obs = ephem.Observer()
-        obs.lon = '-53.5'
-        obs.lat = '-29.3'
-        obs.elevation = 350
+        obs.lon = float(info_lon_lat_elev[0])
+        obs.lat = float(info_lon_lat_elev[1])
+        obs.elevation = float(info_lon_lat_elev[2])
         obs.date = ephem.date(now_datetime)
 
         sun = ephem.Sun()
@@ -63,3 +67,15 @@ def result():
         obs_time = end - start
 
         return start, end, obs_time
+
+
+def get_info():
+    config = ConfigProject()
+
+    info = config.get_geographic_settings()
+
+    latitude = info[0]
+    longitude = info[1]
+    elevation = info[2]
+
+    return latitude, longitude, elevation
