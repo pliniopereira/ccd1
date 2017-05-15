@@ -11,7 +11,7 @@ project_name=All-Sky
 site_id=SJC
 
 [sun_and_moon]
-ignore_lunar_position=true
+ignore_lunar_position=false
 max_lunar_elevation=20
 max_lunar_phase=10
-max_solar_elevation=-3
+max_solar_elevation=-12

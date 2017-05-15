@@ -18,7 +18,6 @@ class WidgetsSite(QtWidgets.QWidget):
         self.lImager = QtWidgets.QLabel("Imager ID:", self)
         self.lImager.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter)
 
-
         # Creating Input Line
         self.ePName = QtWidgets.QLineEdit(self)
         self.ePName.setMaximumWidth(100)
@@ -28,7 +27,6 @@ class WidgetsSite(QtWidgets.QWidget):
 
         self.eImager = QtWidgets.QLineEdit(self)
         self.eImager.setMaximumWidth(100)
-
 
         self.setting_up()
 

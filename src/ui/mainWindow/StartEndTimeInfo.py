@@ -12,8 +12,9 @@ def result():
 
         now_datetime = datetime.datetime.utcnow().replace(hour=12).replace(minute=00).replace(second=0)
         obs = ephem.Observer()
-        obs.lon = float(info_lon_lat_elev[0])
-        obs.lat = float(info_lon_lat_elev[1])
+
+        obs.lat = info_lon_lat_elev[0]
+        obs.lon = info_lon_lat_elev[1]
         obs.elevation = float(info_lon_lat_elev[2])
         obs.date = ephem.date(now_datetime)
 
@@ -57,11 +58,16 @@ def result():
                 end = now_datetime
                 break
 
-            now_datetime = datetime.datetime.utcnow().replace(hour=12).replace(minute=00).replace(second=0) \
-                           + timedelta(minutes=j)
+            # now_datetime = datetime.datetime.utcnow().replace(hour=12).replace(minute=00).replace(second=0) \
+            #                + timedelta(minutes=j)
+            now_datetime += timedelta(minutes=j)
+
             j += 1
 
         obs_time = end - start
+
+        print(start)
+        print(end)
 
         return start, end, obs_time
 
