@@ -26,9 +26,13 @@ class StartEndEphem(QtWidgets.QFrame):
         end_time = str(info_start_end[1])
         end_field = QtWidgets.QLabel(end_time[:-10] + " UTC")
 
+        time_obs_l = QtWidgets.QLabel("Total Obs. Time:", self)
+        time_obs_field = QtWidgets.QLabel("HH:MM Hours")
+
         self.setLayout(set_lvbox(set_hbox(self.title),
                                  set_hbox(start_l, start_field),
-                                 set_hbox(end_l, end_field)))
+                                 set_hbox(end_l, end_field),
+                                 set_hbox(time_obs_l, time_obs_field)))
 
     def config_widgets(self):
         self.title.setAlignment(QtCore.Qt.AlignCenter)
