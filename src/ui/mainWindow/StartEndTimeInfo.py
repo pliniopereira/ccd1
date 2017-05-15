@@ -73,7 +73,4 @@ def result():
 
         obs_time = end - start
 
-        print(start)
-        print(end)
-
         return start, end, obs_time
