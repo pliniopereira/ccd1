@@ -19,51 +19,47 @@ def result():
         moon.compute(obs)
         j = 0
         flag = 0
-        for d in range(1, 2):
-            for i in range(1, 3000):
+        for i in range(1, 3000):
 
-                obs.date = ephem.date(now_datetime)
-                sun = ephem.Sun()
-                sun.compute(obs)
+            obs.date = ephem.date(now_datetime)
+            sun = ephem.Sun()
+            sun.compute(obs)
 
-                moon = ephem.Moon()
-                moon.compute(obs)
-                frac = moon.moon_phase
+            moon = ephem.Moon()
+            moon.compute(obs)
+            frac = moon.moon_phase
 
-                ag_s = float(repr(sun.alt))
-                s_ag = math.degrees(ag_s)
-                ag_m = float(repr(moon.alt))
-                m_ag = math.degrees(ag_m)
+            ag_s = float(repr(sun.alt))
+            s_ag = math.degrees(ag_s)
+            ag_m = float(repr(moon.alt))
+            m_ag = math.degrees(ag_m)
 
-                if float(s_ag) < -12.0 and float(m_ag) < 10.0 and float(frac) < 0.2:
+            if float(s_ag) < -12.0 and float(m_ag) < 10.0 and float(frac) < 0.2:
 
-                    if flag == 0:
-                        start = now_datetime
+                if flag == 0:
+                    start = now_datetime
 
-                        flag = 1
+                    flag = 1
 
-                elif float(s_ag) < -12.0 and float(m_ag) < 5.0 and float(frac) > 0.2:
-                    if flag == 0:
-                        start = now_datetime
-                        flag = 1
+            elif float(s_ag) < -12.0 and float(m_ag) < 5.0 and float(frac) > 0.2:
+                if flag == 0:
+                    start = now_datetime
+                    flag = 1
 
-                elif (float(s_ag) > -12.0 or float(m_ag) > 10.0) and float(frac) < 0.2 and flag == 1:
-                    flag = 0
-                    end = now_datetime
+            elif (float(s_ag) > -12.0 or float(m_ag) > 10.0) and float(frac) < 0.2 and flag == 1:
+                end = now_datetime
 
-                    break
+                break
 
-                elif (float(s_ag) > -12.0 or float(m_ag) > 5.0) and float(frac) > 0.2 and flag == 1:
-                    flag = 0
-                    end = now_datetime
+            elif (float(s_ag) > -12.0 or float(m_ag) > 5.0) and float(frac) > 0.2 and flag == 1:
+                end = now_datetime
 
-                    break
+                break
 
-                now_datetime = datetime.datetime.utcnow().replace(hour=12).replace(minute=00).replace(second=0)+timedelta(minutes=j)
-                # now_datetime = datetime.datetime.utcnow()+timedelta(minutes=j)
-                j = j+1
+            now_datetime = datetime.datetime.utcnow().replace(hour=12).replace(minute=00).replace(second=0) \
+                           + timedelta(minutes=j)
+            j += 1
 
-            now_datetime = datetime.datetime.utcnow().replace(hour=12).replace(minute=00).replace(second=0)+timedelta(days=d)
-
+        obs_time = end - start
 
         return start, end, obs_time
