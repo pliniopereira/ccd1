@@ -19,10 +19,15 @@ class EphemInfo(QtWidgets.QFrame):
     def init_widgets_ephem(self, sune, moone, moonp):
         self.sunE = QtWidgets.QLabel("Sun Elevation:", self)
         self.sunER = QtWidgets.QLabel(sune, self)
+        self.sunER.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter)
+
         self.moonE = QtWidgets.QLabel("Moon Elevation:", self)
         self.moonER = QtWidgets.QLabel(moone, self)
+        self.moonER.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter)
+
         self.moonP = QtWidgets.QLabel("Moon Phase:", self)
         self.moonPR = QtWidgets.QLabel(moonp, self)
+        self.moonPR.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter)
 
     def set_values(self, sune, moone, moonp):
         self.sunER.setText(sune)

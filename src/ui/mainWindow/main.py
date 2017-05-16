@@ -195,8 +195,8 @@ class Main(QtWidgets.QMainWindow):
         self.stopAction = QAction(QIcon('icons/Stop.png'), 'Stop', self)
         try:
             self.stopAction.triggered.connect(self.cam.stop_ephemeris_shooter)
-        except Exception as e:
             self.stopAction.triggered.connect(self.cam.stop_taking_photo)
+        except Exception as e:
             print(e)
 
     def createToolBars(self):
@@ -210,4 +210,3 @@ class Main(QtWidgets.QMainWindow):
         self.toolbar.addSeparator()
         self.toolbar.addAction(self.stopAction)
         self.toolbar.addSeparator()
-

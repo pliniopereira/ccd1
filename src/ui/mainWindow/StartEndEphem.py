@@ -35,6 +35,8 @@ class StartEndEphem(QtWidgets.QFrame):
         time_obs_l = QtWidgets.QLabel("Total Obs. Time:", self)
         time_obs_time = str(info_start_end[2])
         time_obs_field = QtWidgets.QLabel(time_obs_time[:-3] + " Hours")
+        time_obs_field.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter)
+
 
         self.setLayout(set_lvbox(set_hbox(self.title),
                                  set_hbox(start_l, start_field),
