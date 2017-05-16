@@ -33,7 +33,6 @@ class StartEndEphem(QtWidgets.QFrame):
         end_field = QtWidgets.QLabel(end_time[:-10] + " UTC")
 
         time_obs_l = QtWidgets.QLabel("Total Obs. Time:", self)
-        print(info_start_end[2])
         time_obs_time = str(info_start_end[2])
         time_obs_field = QtWidgets.QLabel(time_obs_time[:-3] + " Hours")
 

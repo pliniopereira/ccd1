@@ -1,5 +1,7 @@
+from PyQt5 import QtCore
 from PyQt5 import QtWidgets
 from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import (QMessageBox, QAction)
 
 from src.business.configuration.configSystem import ConfigSystem
 from src.controller.camera import Camera
@@ -22,6 +24,9 @@ class Main(QtWidgets.QMainWindow):
         # Init Layouts
         self.init_widgets()
         self.init_user_interface()
+        self.createActions()
+
+        self.createToolBars()
 
     def init_user_interface(self):
         self.cont = conts(self)
@@ -59,8 +64,6 @@ class Main(QtWidgets.QMainWindow):
         """
         menubar = self.menuBar()
 
-        a1 = self.action_close()
-        self.add_to_menu(menubar, a1[1], a1[0])
         a3 = self.action_connect_disconnect()
         self.add_to_menu(menubar, a3[0], a3[1], a3[2])
         a4 = self.action_continuous_shooter()
@@ -152,4 +155,59 @@ class Main(QtWidgets.QMainWindow):
             m.addAction(w)
 
         return m
+
+    def closeEvent(self, event):
+
+        reply = QMessageBox.question(self, 'Message',
+                                         "Are you sure to quit?", QMessageBox.Yes |
+                                         QMessageBox.No, QMessageBox.No)
+
+        if reply == QMessageBox.Yes:
+            event.accept()
+        else:
+            event.ignore()
+
+    def createActions(self):
+        self.connectAction = QAction(QIcon('icons/Connect.png'), 'Connect', self)
+        self.connectAction.triggered.connect(self.cam.connect)
+        '''
+        self.connectAction.setCheckable(True)
+        self.connectAction.setChecked(True)
+        self.setDisabled(True)
+        '''
+
+        self.disconnectAction = QAction(QIcon('icons/Disconnect.png'), 'Disconnect', self)
+        self.disconnectAction.triggered.connect(self.cam.disconnect)
+
+        self.automaticAction = QAction(QIcon('icons/Run_Automatic.png'), 'Run Automatic', self)
+        self.automaticAction.triggered.connect(self.cam.start_ephemeris_shooter)
+        '''
+        self.automaticAction.setCheckable(True)
+        self.automaticAction.setChecked(True)
+        '''
+        self.manualAction = QAction(QIcon('icons/Run_Manual.png'), 'Run Manual', self)
+        self.manualAction.triggered.connect(self.cam.start_taking_photo)
+        '''
+        self.manualAction.setCheckable(True)
+        self.manualAction.setChecked(False)
+        '''
+
+        self.stopAction = QAction(QIcon('icons/Stop.png'), 'Stop', self)
+        try:
+            self.stopAction.triggered.connect(self.cam.stop_ephemeris_shooter)
+        except Exception as e:
+            self.stopAction.triggered.connect(self.cam.stop_taking_photo)
+            print(e)
+
+    def createToolBars(self):
+        self.toolbar = self.addToolBar('Close Toolbar')
+        self.toolbar.setIconSize(QtCore.QSize(70, 70))
+        self.toolbar.addAction(self.connectAction)
+        self.toolbar.addAction(self.disconnectAction)
+        self.toolbar.addSeparator()
+        self.toolbar.addAction(self.automaticAction)
+        self.toolbar.addAction(self.manualAction)
+        self.toolbar.addSeparator()
+        self.toolbar.addAction(self.stopAction)
+        self.toolbar.addSeparator()
 
