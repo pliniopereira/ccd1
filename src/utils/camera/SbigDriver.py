@@ -529,9 +529,14 @@ def photoshoot(etime, pre, binning, dark_photo, get_level1, get_level2,
 
     try:
         if dark_photo == 1:
-            cin = cin(ccd=SbigLib.CCD_REQUEST.CCD_IMAGING.value, exposureTime=etime,
-                      openShutter=SbigLib.SHUTTER_COMMAND.SC_CLOSE_SHUTTER.value, readoutMode=v_read, top=0, left=0,
-                      height=v_h, width=v_w)
+            try:
+                cin = cin(openShutter=SbigLib.SHUTTER_COMMAND.SC_CLOSE_SHUTTER.value)
+            except Exception as e:
+                print("Close SHUTTER_COMMAND ERROR ->" + str(e))
+            finally:
+                cin = cin(ccd=SbigLib.CCD_REQUEST.CCD_IMAGING.value, exposureTime=etime,
+                          openShutter=SbigLib.SHUTTER_COMMAND.SC_CLOSE_SHUTTER.value, readoutMode=v_read,
+                          top=0, left=0, height=v_h, width=v_w)
         else:
             cin = cin(ccd=SbigLib.CCD_REQUEST.CCD_IMAGING.value, exposureTime=etime,
                       openShutter=SbigLib.SHUTTER_COMMAND.SC_OPEN_SHUTTER.value, readoutMode=v_read, top=0, left=0,
