@@ -194,8 +194,12 @@ class Main(QtWidgets.QMainWindow):
 
         self.stopAction = QAction(QIcon('icons/Stop.png'), 'Stop', self)
         try:
-            self.stopAction.triggered.connect(self.cam.stop_ephemeris_shooter)
-            self.stopAction.triggered.connect(self.cam.stop_taking_photo)
+            if self.cam.start_taking_photo:
+                self.stopAction.triggered.connect(self.cam.stop_taking_photo)
+            elif self.cam.start_ephemeris_shooter:
+                self.stopAction.triggered.connect(self.cam.stop_ephemeris_shooter)
+            else:
+                print("Nothing to stop")
         except Exception as e:
             print(e)
 
