@@ -33,16 +33,17 @@ class EphemerisShooter(QtCore.QThread):
         self.config = ConfigProject()
 
         info = self.config.get_geographic_settings()
-        infosun = self.config.get_moonsun_settings()
 
         self.latitude = info[0]  # '-45.51'
         self.longitude = info[1]  # '-23.12'
         self.elevation = info[2]  # 350
 
-        self.max_solar_elevation = infosun[0]  # -12
-        self.ignore_lunar_position = infosun[1]
-        self.max_lunar_elevation = infosun[2]  # 8
-        self.max_lunar_phase = infosun[3]  # 1
+        info_sun = self.config.get_moonsun_settings()
+        self.max_solar_elevation = float(info_sun[0])  # -12
+        self.ignore_lunar_position = info_sun[1]
+        self.max_lunar_elevation = float(info_sun[2])  # 8
+        self.max_lunar_phase = float(info_sun[3])  # 1
+
         self.wait_temperature = False
 
         print(int(infocam[4]))
@@ -129,6 +130,15 @@ class EphemerisShooter(QtCore.QThread):
 
                 # Variavel de controle do shooter
                 t = 0
+
+                # print("\n\n")
+                # print("math.degrees(a) = " + str(math.degrees(a)))
+                # print("self.max_solar_elevation = " + str(self.max_solar_elevation))
+                # print("self.ignore_lunar_position = " + str(self.ignore_lunar_position))
+                # print("math.degrees(b) = " + str(math.degrees(b)))
+                # print("self.max_lunar_elevation = " + str(self.max_lunar_elevation))
+                # print("self.max_lunar_phase = " + str(self.max_lunar_phase))
+                # print("\n\n")
 
                 if float(math.degrees(a)) < self.max_solar_elevation or t == 1:
                     if (not self.ignore_lunar_position and float(math.degrees(b)) < self.max_lunar_elevation
